@@ -1,30 +1,33 @@
 // ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
-import 'package:authentication/views/auth/pages/sign_up_page.dart';
+import 'package:authentication/views/auth/change_password.dart';
+import 'package:authentication/views/auth/sign_up_page.dart';
 
-import 'package:authentication/views/auth/view_model/firebase_auth_service.dart';
+import 'package:authentication/views/auth/auth.dart';
 import 'package:authentication/views/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
+  bool _rememberMe = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -34,6 +37,21 @@ class _LoginScreenState extends State<LoginScreen> {
       _isPasswordVisible = !_isPasswordVisible;
     });
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   SharedPreferences.getInstance().then((prefs) {
+  //     if (prefs.getBool('rememberMe') == true) {
+  //       Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => HomePage(),
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                   return null;
                                 },
-                                controller: _usernameController,
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                   hintText: '@username',
                                   hintStyle: TextStyle(
@@ -196,15 +214,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                               BorderRadius.circular(8.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                              const BorderSide(
+                                          borderSide: const BorderSide(
                                               color: Colors.white54),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderSide:
-                                              const BorderSide(
+                                          borderSide: const BorderSide(
                                               color: Colors.red),
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -221,21 +237,74 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Checkbox(
+                                    value: _rememberMe,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _rememberMe = value!;
+                                        // Save the "rememberMe" preference when the checkbox changes.
+                                        SharedPreferences.getInstance()
+                                            .then((prefs) {
+                                          prefs.setBool('rememberMe', value);
+                                        });
+                                      });
+                                    },
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        "Remember Me",
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Colors.white54,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 65.w,
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ForgotPasswordPage()));
+                                          },
+                                          child: Text(
+                                            "Forgot Password?",
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.purple[200],
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
                               SizedBox(height: 30.h),
                               InkWell(
                                 onTap: () async {
                                   if (formKey.currentState!.validate()) {
                                     final response = await FirebaseAuthService()
                                         .signInWithEmailAndPassword(
-                                      username: _usernameController.text,
+                                      username: _emailController.text,
                                       password: _passwordController.text,
                                     );
                                     if (response == "Login Successful") {
                                       Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => HomePage(),
-                                          ));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HomePage(),
+                                        ),
+                                      );
                                     } else {
                                       Fluttertoast.showToast(msg: response);
                                     }

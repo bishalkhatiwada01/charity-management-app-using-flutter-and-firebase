@@ -1,6 +1,6 @@
 import 'package:authentication/firebase_options.dart';
 import 'package:authentication/util/theme.dart';
-import 'package:authentication/views/auth/pages/login_page.dart';
+import 'package:authentication/views/auth/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const LoginScreen(),
+      child: const LoginPage(),
     );
   }
 }

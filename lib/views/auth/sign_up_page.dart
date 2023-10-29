@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:authentication/views/auth/pages/login_page.dart';
+import 'package:authentication/views/auth/login_page.dart';
 
 import 'package:authentication/views/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -400,7 +400,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const LoginScreen()));
+                                                const LoginPage()));
                                   },
                                   child: Text(
                                     "Login",
