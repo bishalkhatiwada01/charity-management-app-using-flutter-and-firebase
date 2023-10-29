@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                                   "Username",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -133,13 +133,12 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   hintText: '@username',
                                   hintStyle: TextStyle(
-                                    color: Colors.white54,
                                     fontSize: 14.sp,
                                   ),
                                   contentPadding: const EdgeInsets.all(14.0),
                                   prefixIcon: const Icon(
                                     Icons.person_3_outlined,
-                                    color: Colors.white38,
+                                    color: Colors.white,
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
@@ -169,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                   "Password",
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -191,21 +190,20 @@ class _LoginPageState extends State<LoginPage> {
                                         hintText: '  ⚪️⚪️⚪️⚪️⚪️⚪️⚪️',
                                         hintStyle: TextStyle(
                                           letterSpacing: 3,
-                                          color: Colors.white54,
                                           fontSize: 6.sp,
                                         ),
                                         contentPadding:
                                             const EdgeInsets.all(10.0),
                                         prefixIcon: const Icon(
                                           Icons.lock_outline,
-                                          color: Colors.white38,
+                                          color: Colors.white,
                                         ),
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             _isPasswordVisible
                                                 ? Icons.visibility
                                                 : Icons.visibility_off,
-                                            color: Colors.white38,
+                                            color: Colors.white,
                                           ),
                                           onPressed: _togglePasswordVisibility,
                                         ),
@@ -244,11 +242,12 @@ class _LoginPageState extends State<LoginPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Checkbox(
+                                    
                                     value: _rememberMe,
                                     onChanged: (value) {
                                       setState(() {
                                         _rememberMe = value!;
-                                        // Save the "rememberMe" preference when the checkbox changes.
+                                        
                                         SharedPreferences.getInstance()
                                             .then((prefs) {
                                           prefs.setBool('rememberMe', value);
@@ -263,8 +262,8 @@ class _LoginPageState extends State<LoginPage> {
                                       Text(
                                         "Remember Me",
                                         style: TextStyle(
-                                          fontSize: 12.sp,
-                                          color: Colors.white54,
+                                          fontSize: 14.sp,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       SizedBox(
@@ -281,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
                                           child: Text(
                                             "Forgot Password?",
                                             style: TextStyle(
-                                              fontSize: 12.sp,
+                                              fontSize: 15.sp,
                                               color: Colors.purple[200],
                                             ),
                                           )),
@@ -311,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 },
                                 child: Container(
-                                  width: 329.w,
+                                  width: double.infinity,
                                   height: 42.0.h,
                                   decoration: BoxDecoration(
                                     gradient: const LinearGradient(
@@ -325,7 +324,8 @@ class _LoginPageState extends State<LoginPage> {
                                   child: const Center(
                                     child: Text(
                                       "Login",
-                                      style: TextStyle(fontSize: 14),
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -338,7 +338,7 @@ class _LoginPageState extends State<LoginPage> {
                                     "Don't have an account? ",
                                     style: TextStyle(
                                       fontSize: 14.sp,
-                                      color: Colors.white70,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   SizedBox(
