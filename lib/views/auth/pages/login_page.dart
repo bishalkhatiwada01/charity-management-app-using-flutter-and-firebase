@@ -1,8 +1,9 @@
-import 'package:authentication/views/auth/pages/signup_page.dart';
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+
+import 'package:authentication/views/auth/pages/sign_up_page.dart';
+
 import 'package:authentication/views/auth/view_model/firebase_auth_service.dart';
 import 'package:authentication/views/home/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,11 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordVisible = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final FirebaseAuthService _auth = FirebaseAuthService();
-
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -37,26 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  Future<void> _showPasswordIncorrectDialog(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Incorrect Password"),
-          content: Text("The entered password is incorrect. Please try again."),
-          actions: [
-            TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -64,7 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFF242121),
         body: Stack(
           fit: StackFit.loose,
           children: [
@@ -82,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 return Container(
                     padding:
                         const EdgeInsets.only(top: 30, left: 40, right: 40),
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(40)),
@@ -109,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: TextStyle(
                                     fontSize: 28.sp,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -131,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (value!.isEmpty) {
                                     return "username required!!";
                                   }
+                                  return null;
                                 },
                                 controller: _usernameController,
                                 decoration: InputDecoration(
@@ -149,11 +128,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Colors.white54),
+                                        const BorderSide(color: Colors.white54),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.red),
+                                    borderSide:
+                                        const BorderSide(color: Colors.red),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   enabledBorder: OutlineInputBorder(
@@ -185,6 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if (value!.isEmpty) {
                                           return "password required!!";
                                         }
+                                        return null;
                                       },
                                       controller: _passwordController,
                                       obscureText: !_isPasswordVisible,
@@ -216,13 +197,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: Colors.white54),
+                                              const BorderSide(
+                                              color: Colors.white54),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: Colors.red),
+                                              const BorderSide(
+                                              color: Colors.red),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
@@ -239,53 +222,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                               SizedBox(height: 30.h),
-                              // InkWell(
-                              //   onTap: () async {
-                              //     if (formKey.currentState!.validate()) {
-
-                              //       try {
-                              //         await FirebaseAuth.instance
-                              //             .createUserWithEmailAndPassword(
-                              //           email: _usernameController.text,
-                              //           password: _passwordController.text,
-                              //         );
-
-                              //         Navigator.pushReplacement(
-                              //             context,
-                              //             MaterialPageRoute(
-                              //               builder: (context) =>
-                              //                   const HomePage(),
-                              //             ));
-                              //       } catch (e) {
-                              //         if (kDebugMode) {
-                              //           print(e);
-                              //         }
-                              //       }
-                              //     }
-                              //   },
-                              //   child: Container(
-                              //     width: 329.w,
-                              //     height: 42.0.h,
-                              //     decoration: BoxDecoration(
-                              //       gradient: const LinearGradient(
-                              //         colors: [
-                              //           Color(0xFF9C3FE4),
-                              //           Color(0xFFC65647)
-                              //         ],
-                              //       ),
-                              //       borderRadius: BorderRadius.circular(8.0),
-                              //     ),
-                              //     child: const Center(
-                              //       child: Text(
-                              //         "Login",
-                              //         style: TextStyle(fontSize: 14),
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-
-                              ElevatedButton(
-                                onPressed: () async {
+                              InkWell(
+                                onTap: () async {
                                   if (formKey.currentState!.validate()) {
                                     final response = await FirebaseAuthService()
                                         .signInWithEmailAndPassword(
@@ -296,17 +234,34 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomePage(),
+                                            builder: (context) => HomePage(),
                                           ));
                                     } else {
                                       Fluttertoast.showToast(msg: response);
                                     }
                                   }
                                 },
-                                child: Text("Login"),
+                                child: Container(
+                                  width: 329.w,
+                                  height: 42.0.h,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color(0xFF9C3FE4),
+                                        Color(0xFFC65647)
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "Login",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 6.h),
+                              SizedBox(height: 20.h),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -325,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SignupPage()));
+                                                  const RegisterPage()));
                                     },
                                     child: Text(
                                       "Signup",

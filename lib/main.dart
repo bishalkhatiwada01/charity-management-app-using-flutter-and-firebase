@@ -1,5 +1,5 @@
 import 'package:authentication/firebase_options.dart';
-import 'package:authentication/views/auth/pages/login_page.dart';
+import 'package:authentication/util/theme.dart';
 import 'package:authentication/views/auth/pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +27,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'First Method',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-          ),
+          theme: AppTheme().getApplicationTheme(),
           home: child,
         );
       },
-      child: LoginScreen(),
+      child: const LoginScreen(),
     );
   }
 }
