@@ -171,7 +171,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           ),
                         ),
                         child: Text(
-                          'Send OTP',
+                          'Submit',
                           style: TextStyle(fontSize: 16.sp),
                         ),
                       ),
@@ -180,16 +180,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Text(
-                    "or",
-                    style: TextStyle(fontSize: 22.sp, color: Colors.white),
-                  ),
                   SizedBox(
                     height: 20.h,
                   ),
                   const Text(
-                    "Do you have an account?",
-                    style: TextStyle(color: Colors.white),
+                    "Or don't have an account?",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                   SizedBox(
                     height: 30.h,
