@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAc1CsA-FPjqB-By4Q5RRsxpdzeIbB8m-0',
-    appId: '1:971518417129:android:84bfd8d4470b9daa657878',
-    messagingSenderId: '971518417129',
-    projectId: 'charity-management-app',
-    storageBucket: 'charity-management-app.appspot.com',
+    apiKey: 'AIzaSyAVfmC2jQwRqNHvzBN91uoEaf9Zrq0y5SU',
+    appId: '1:512731659209:android:39a880cb9707788df5c618',
+    messagingSenderId: '512731659209',
+    projectId: 'social-media-app-79e8b',
+    databaseURL: 'https://social-media-app-79e8b-default-rtdb.firebaseio.com',
+    storageBucket: 'social-media-app-79e8b.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB_QaT9QcCn5V9fkxPrKQWYOJ1ObQnDH6M',
-    appId: '1:971518417129:ios:5b27a934bb6796d1657878',
-    messagingSenderId: '971518417129',
-    projectId: 'charity-management-app',
-    storageBucket: 'charity-management-app.appspot.com',
+    apiKey: 'AIzaSyAz31WHEJ29hRvnyXOfDEGJj9xqHG8fu1c',
+    appId: '1:512731659209:ios:8a106b43e4023adff5c618',
+    messagingSenderId: '512731659209',
+    projectId: 'social-media-app-79e8b',
+    databaseURL: 'https://social-media-app-79e8b-default-rtdb.firebaseio.com',
+    storageBucket: 'social-media-app-79e8b.appspot.com',
     iosBundleId: 'com.example.authentication',
   );
 }

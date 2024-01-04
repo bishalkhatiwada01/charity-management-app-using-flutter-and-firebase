@@ -1,6 +1,6 @@
-import 'package:authentication/config/firebase_options.dart';
-import 'package:authentication/utils/theme.dart';
-import 'package:authentication/views/auth/login_page.dart';
+import 'package:authentication/common/themes/theme.dart';
+import 'package:authentication/features/Auth/config/firebase_options.dart';
+import 'package:authentication/features/Auth/views/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

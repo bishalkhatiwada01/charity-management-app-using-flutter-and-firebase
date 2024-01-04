@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "971518417129",
-    "project_id": "charity-management-app",
-    "storage_bucket": "charity-management-app.appspot.com"
+    "project_number": "512731659209",
+    "firebase_url": "https://social-media-app-79e8b-default-rtdb.firebaseio.com",
+    "project_id": "social-media-app-79e8b",
+    "storage_bucket": "social-media-app-79e8b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:971518417129:android:84bfd8d4470b9daa657878",
+        "mobilesdk_app_id": "1:512731659209:android:39a880cb9707788df5c618",
         "android_client_info": {
           "package_name": "com.example.authentication"
         }
@@ -15,7 +16,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAc1CsA-FPjqB-By4Q5RRsxpdzeIbB8m-0"
+          "current_key": "AIzaSyAVfmC2jQwRqNHvzBN91uoEaf9Zrq0y5SU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512731659209:android:ab611348c134a225f5c618",
+        "android_client_info": {
+          "package_name": "com.example.socialmediaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVfmC2jQwRqNHvzBN91uoEaf9Zrq0y5SU"
         }
       ],
       "services": {
