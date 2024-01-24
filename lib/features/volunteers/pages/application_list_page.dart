@@ -1,49 +1,111 @@
+import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/volunteers/data/volunteer_data_source.dart';
+import 'package:charity_management_app/features/volunteers/pages/my_application_detail_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
-class MyApplicationsPage extends ConsumerStatefulWidget {
-  const MyApplicationsPage({super.key});
-
+class ApplicationsPage extends ConsumerStatefulWidget {
   @override
-  ConsumerState<MyApplicationsPage> createState() => _MyApplicationPageState();
+  ConsumerState<ApplicationsPage> createState() => _ApplicationsPageState();
 }
 
-class _MyApplicationPageState extends ConsumerState<MyApplicationsPage> {
+class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
   @override
   Widget build(BuildContext context) {
-    final volunteerData = ref.watch(volunteerApplicationProvider);
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = _auth.currentUser;
+    final uid = user!.uid;
+    final applicationList = ref.watch(volunteerApplicationProvider);
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.inversePrimary),
-          title: Text(
-            'Application List',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
+        title: const Text(
+          'My Applications',
+          style: TextStyle(letterSpacing: 4),
         ),
-        body: volunteerData.when(
-          data: (data) {
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                // final volunteer = data[index];
-                return Card(
-                  child: ListTile(
-                    title: Text('hi'),
+      ),
+      body: applicationList.when(
+        data: (data) {
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final application = data[index];
+              print(application.volunteer.volunteerId);
+              if (application.userId == uid) {
+                return Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                  child: Card(
+                    elevation: 5.0,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 6.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Color.fromRGBO(129, 156, 207, 0.898)),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        leading: Container(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              right:
+                                  BorderSide(width: 1.0, color: Colors.white24),
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 30.0,
+                            backgroundImage:
+                                NetworkImage(application.post.postImageUrl),
+                          ),
+                        ),
+                        title: Text(
+                          application.post.postHeadline,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              application.post.postAddress,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              formatDateTime(application.volunteerCreatedAt),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ApplicationDetailPage(
+                                    application: application,
+                                  )));
+                        },
+                      ),
+                    ),
                   ),
                 );
-              },
-            );
-          },
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (e, s) => Center(
-            child: Text(e.toString()),
-          ),
-        ));
+              } else {
+                const Center(child: Text("No Application Found"));
+              }
+            },
+          );
+        },
+        error: (error, stack) => Center(
+          child: Text(error.toString()),
+        ),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }

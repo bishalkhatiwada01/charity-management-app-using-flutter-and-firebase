@@ -4,6 +4,7 @@ import 'package:charity_management_app/features/auth/pages/login_page.dart';
 import 'package:charity_management_app/features/notifications/notification_page.dart';
 import 'package:charity_management_app/features/profile/pages/profile_page.dart';
 import 'package:charity_management_app/features/volunteers/pages/application_list_page.dart';
+import 'package:charity_management_app/features/volunteers/pages/my_application_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -113,7 +114,7 @@ class MyDrawer extends StatelessWidget {
               onTap: () {
                 // pop drawer
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const MyApplicationsPage()));
+                    builder: (context) => ApplicationsPage()));
               },
             ),
           ),

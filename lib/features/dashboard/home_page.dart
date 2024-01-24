@@ -2,6 +2,7 @@
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
 import 'package:charity_management_app/features/profile/pages/profile_page.dart';
 import 'package:charity_management_app/features/volunteers/pages/application_list_page.dart';
+import 'package:charity_management_app/features/volunteers/pages/my_application_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const MyApplicationsPage()));
+                        builder: (context) => ApplicationsPage()));
               },
               child: Text(
                 'VolunteerApplications',

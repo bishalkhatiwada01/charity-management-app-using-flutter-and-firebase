@@ -3,15 +3,15 @@ class VolunteerApplication {
   final String postId;
   final String volunteerName;
   final String volunteerEmail;
-  final List<String> volunteerInterests;
+  List<String>? volunteerInterests;
   final String volunteerExperience;
   final String volunteerAddress;
   final Volunteer volunteer;
   final Post post;
-  final String volunteerQualification;
+  String? volunteerQualification;
   final String volunteerCreatedAt;
   final String volunteerContactNum;
-  final List<String> volunteerSkills;
+List<String>? volunteerSkills;
 
   VolunteerApplication({
     required this.userId,
@@ -20,13 +20,13 @@ class VolunteerApplication {
     required this.volunteer,
     required this.post,
     required this.volunteerEmail,
-    required this.volunteerInterests,
+    this.volunteerInterests,
     required this.volunteerExperience,
     required this.volunteerAddress,
-    required this.volunteerQualification,
+    this.volunteerQualification,
     required this.volunteerCreatedAt,
     required this.volunteerContactNum,
-    required this.volunteerSkills,
+    this.volunteerSkills,
   });
 
   factory VolunteerApplication.fromJson(Map<String, dynamic> json) {
@@ -49,18 +49,21 @@ class VolunteerApplication {
 }
 
 class Volunteer {
-  final String volunteerName;
-  final String volunteerEmail;
+  final String userName;
+  final String userEmail;
+  String? volunteerId;
 
   Volunteer({
-    required this.volunteerName,
-    required this.volunteerEmail,
+    required this.userName,
+    required this.userEmail,
+    this.volunteerId,
   });
 
   factory Volunteer.fromJson(Map<String, dynamic> json) {
     return Volunteer(
-      volunteerName: "${json['firstname']} ${json['lastname']}",
-      volunteerEmail: json['email'],
+      userName: "${json['firstname']} ${json['lastname']}",
+      userEmail: json['email'],
+      volunteerId: json['userId'],
     );
   }
 }
@@ -72,7 +75,7 @@ class Post {
   final String postContact;
   final String postImageUrl;
   final String postDate;
-  final String postId;
+  final String? postId;
   Post({
     required this.postHeadline,
     required this.postContent,

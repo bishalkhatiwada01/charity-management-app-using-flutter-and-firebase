@@ -20,10 +20,6 @@ class _PostPageState extends ConsumerState<PostPage> {
   @override
   Widget build(BuildContext context) {
     final postData = ref.watch(postProvider);
-    if (kDebugMode) {
-      print(postData);
-    }
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,

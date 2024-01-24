@@ -3,6 +3,7 @@
 import 'package:charity_management_app/common/widgets/my_custom_button.dart';
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
 import 'package:charity_management_app/features/auth/services/auth_service.dart';
+import 'package:charity_management_app/features/auth/services/status_page.dart';
 import 'package:charity_management_app/features/dashboard/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
+      MaterialPageRoute(builder: (context) => const StatusPage()),
     );
   }
 
@@ -117,6 +118,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(height: 35.h),
                           TextFormField(
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                            ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
@@ -156,6 +161,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(height: 15.h),
                           TextFormField(
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                            ),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
@@ -197,6 +206,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           SizedBox(height: 15.h),
                           TextFormField(
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.white,
+                            ),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "email required!!";
@@ -239,6 +252,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             children: [
                               Expanded(
                                 child: TextFormField(
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Colors.white,
+                                  ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return "password required!!";
@@ -297,6 +314,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             children: [
                               Expanded(
                                 child: TextFormField(
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Colors.white,
+                                  ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return "password required!!";
