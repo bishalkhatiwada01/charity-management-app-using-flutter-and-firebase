@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'data_model.dart';
+import 'volunteer_data_model.dart';
 
 final volunteerApplicationProvider = FutureProvider<List<VolunteerApplication>>(
-    (ref) => DataService().getApplication());
+  (ref) => DataService().getApplication(),
+);
 
-class DataService {
+final class DataService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<List<VolunteerApplication>> getApplication() async {

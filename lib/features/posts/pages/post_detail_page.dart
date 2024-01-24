@@ -1,29 +1,16 @@
-
+import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
 import 'package:charity_management_app/features/posts/widgets/volunteer_button.dart';
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class PostDetailsPage extends StatefulWidget {
-  final String headline;
-  final String content;
-  final String address;
-  final String contact;
-  final String imageUrl;
-  final String date;
-  final String postId;
+  final PostData postModel;
 
   const PostDetailsPage({
-    super.key, 
-    required this.headline,
-    required this.content,
-    required this.address,
-    required this.contact,
-    required this.imageUrl,
-    required this.date,
-    required this.postId,
+    super.key,
+    required this.postModel,
   });
 
   @override
@@ -37,7 +24,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
       // Delete the post from Firestore
       await FirebaseFirestore.instance
           .collection('posts')
-          .doc(widget.postId)
+          .doc(widget.postModel.postId)
           .delete();
 
       // Navigate back to the homepage after successful deletion
@@ -74,9 +61,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
             children: [
               ClipRRect(
                 borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(12.0)),
+                    const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
-                  widget.imageUrl,
+                  widget.postModel.postImageUrl,
                   height: 200.0,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -88,7 +75,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.headline,
+                      widget.postModel.postHeadline,
                       style: TextStyle(
                         fontSize: 18.0,
                         color: Theme.of(context).colorScheme.inversePrimary,
@@ -103,15 +90,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             text: 'Address: ',
                             style: TextStyle(
                               color:
-                              Theme.of(context).colorScheme.inversePrimary,
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
                           ),
-                          TextSpan(text: '${widget.address}',style: TextStyle(
-                            color:
-                            Theme.of(context).colorScheme.inversePrimary,
-                          ),)
+                          TextSpan(
+                            text: '${widget.postModel.postAddress}',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -123,15 +113,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             text: 'Date: ',
                             style: TextStyle(
                               color:
-                              Theme.of(context).colorScheme.inversePrimary,
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
-                          TextSpan(text: '${widget.date}',style: TextStyle(
-                            color:
-                            Theme.of(context).colorScheme.inversePrimary,
-                          ),)
+                          TextSpan(
+                            text: widget.postModel.postDate,
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -143,16 +136,17 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             text: 'Contact no: ',
                             style: TextStyle(
                               color:
-                              Theme.of(context).colorScheme.inversePrimary,
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
-                          TextSpan(text: '${widget.contact}',
-                          style: TextStyle(
-                            color:
-                            Theme.of(context).colorScheme.inversePrimary,
-                          ),
+                          TextSpan(
+                            text: widget.postModel.postContact,
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
                           ),
                         ],
                       ),
@@ -167,34 +161,31 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                       ),
                     ),
                     Text(
-                      '${widget.content}',
+                      widget.postModel.postContent,
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary),
                     ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(width: 16.0),
-                      VolunteerButton(
-                        onVolunteerPressed: () {
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(width: 16.0),
+                          VolunteerButton(onVolunteerPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => VolunteerApplicationPage(
-                                      postId: widget.postId,
+                                      postId: widget.postModel.postId,
                                     )));
-                            
-                        }
+                          }),
+                          SizedBox(width: 16.0),
+                          DonateButton(
+                            onDonatePressed: () {
+                              // Implement the logic for donation
+                            },
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 16.0),
-                      DonateButton(
-                        onDonatePressed: () {
-                          // Implement the logic for donation
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
                   ],
                 ),
               ),

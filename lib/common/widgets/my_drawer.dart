@@ -113,8 +113,8 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pop(context);
 
                 // navigate to ApplicationPage
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ApplicationsPage()));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => ApplicationListPage()));
               },
             ),
           ),

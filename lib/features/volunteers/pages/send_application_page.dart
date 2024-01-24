@@ -44,7 +44,7 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
   }
 
   List<String> selectedInterests = [];
-  List<String> selectedSkills = <String>[];
+  List<String> selectedSkills = [];
   String? _selectedExperience;
 
   Future<void> _submitApplication() async {

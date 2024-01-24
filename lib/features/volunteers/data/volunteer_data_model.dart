@@ -2,48 +2,48 @@ class VolunteerApplication {
   final String userId;
   final String postId;
   final String volunteerName;
-  final String email;
-  final List<String> interests;
-  final String experience;
-  final String address;
+  final String volunteerEmail;
+  final List<String> volunteerInterests;
+  final String volunteerExperience;
+  final String volunteerAddress;
   final Volunteer volunteer;
   final Post post;
-  final String qualification;
-  final String createdAt;
-  final String contactNum;
-  final String skills;
+  final String volunteerQualification;
+  final String volunteerCreatedAt;
+  final String volunteerContactNum;
+  final List<String> volunteerSkills;
 
   VolunteerApplication({
     required this.userId,
     required this.postId,
-    required this.email,
-    required this.qualification,
     required this.volunteerName,
-    required this.interests,
-    required this.contactNum,
-    required this.address,
-    required this.experience,
     required this.volunteer,
     required this.post,
-    required this.createdAt,
-    required this.skills,
+    required this.volunteerEmail,
+    required this.volunteerInterests,
+    required this.volunteerExperience,
+    required this.volunteerAddress,
+    required this.volunteerQualification,
+    required this.volunteerCreatedAt,
+    required this.volunteerContactNum,
+    required this.volunteerSkills,
   });
 
   factory VolunteerApplication.fromJson(Map<String, dynamic> json) {
     return VolunteerApplication(
       userId: json['userId'],
       postId: json['postId'],
-      email: json['email'],
-      volunteerName: json['fullName'],
-      contactNum: json['contactNumber'],
-      interests: List<String>.from(json['interests']),
-      experience: json['experience'],
-      qualification: json['qualification'],
-      address: json['address'],
+      volunteerEmail: json['volunteerEmail'],
+      volunteerName: json['volunteerFullName'],
+      volunteerContactNum: json['volunteerContactNumber'],
+      volunteerInterests: List<String>.from(json['volunteerInterests']),
+      volunteerExperience: json['volunteerExperience'],
+      volunteerQualification: json['volunteerQualification'],
+      volunteerAddress: json['volunteerAddress'],
       volunteer: json['volunteer'],
-      post: json['post'],
-      createdAt: json['date'],
-      skills: json['skills'],
+      post: json['posts'],
+      volunteerCreatedAt: json['volunteerDate'],
+      volunteerSkills: List<String>.from(json['volunteerSkills']),
     );
   }
 }
@@ -74,7 +74,7 @@ class Post {
   final String postDate;
   final String postId;
   Post({
-     required this.postHeadline,
+    required this.postHeadline,
     required this.postContent,
     required this.postAddress,
     required this.postContact,
@@ -85,13 +85,13 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      postAddress: json['address'],
-      postContent: json['content'],
-      postHeadline: json['headline'],
-      postImageUrl: json['imageUrl'],
-      postContact: json['contact'],
+      postAddress: json['postAddress'],
+      postContent: json['postContent'],
+      postHeadline: json['postHeadline'],
+      postImageUrl: json['postImageUrl'],
+      postContact: json['postContact'],
       postId: json['postId'],
-      postDate: json['createdAt'],
+      postDate: json['postCreatedAt'],
     );
   }
 }
