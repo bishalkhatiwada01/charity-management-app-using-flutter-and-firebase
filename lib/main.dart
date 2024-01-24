@@ -10,7 +10,6 @@ import 'package:charity_management_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -18,7 +17,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      // child: const MainPage(),
       child: const StatusPage(),
     );
   }
@@ -61,6 +59,7 @@ class _MainPageState extends State<MainPage> {
     const NewsPage(),
     const NotificationPage()
   ];
+  
 
   int _selectedIndex = 0;
 

@@ -1,10 +1,9 @@
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
 import 'package:charity_management_app/features/posts/data/post_data_source.dart';
 import 'package:charity_management_app/features/posts/widgets/post_card..dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PostPage extends ConsumerStatefulWidget {
   const PostPage({Key? key}) : super(key: key);
@@ -21,6 +20,10 @@ class _PostPageState extends ConsumerState<PostPage> {
   @override
   Widget build(BuildContext context) {
     final postData = ref.watch(postProvider);
+    if (kDebugMode) {
+      print(postData);
+    }
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -38,17 +41,17 @@ class _PostPageState extends ConsumerState<PostPage> {
         body: postData.when(
           data: (data) {
             return data.isEmpty
-                ? Text('No posts')
+                ? const Text('No posts')
                 : ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                        return PostCard(
+                      return PostCard(
                         postData: data[index],
-                        );
-                      },
-                    );
+                      );
+                    },
+                  );
           },
           error: (e, s) => Center(
             child: Text(e.toString()),

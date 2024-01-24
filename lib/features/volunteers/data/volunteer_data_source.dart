@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'volunteer_data_model.dart';
 
@@ -24,8 +25,8 @@ final class DataService {
         });
       }));
       return applicationList;
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -35,10 +36,12 @@ final class DataService {
           await _db.collection('users').doc(volunteerId).get();
 
       final userV = Volunteer.fromJson(volunteer.data()!);
-      print(userV.runtimeType);
+      if (kDebugMode) {
+        print(userV.runtimeType);
+      }
       return userV;
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 
@@ -49,8 +52,8 @@ final class DataService {
 
       final postData = Post.fromJson(post.data()!);
       return postData;
-    } on FirebaseException catch (e) {
-      throw e;
+    } on FirebaseException {
+      rethrow;
     }
   }
 }

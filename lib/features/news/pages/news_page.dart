@@ -8,6 +8,7 @@ class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NewsPageState createState() => _NewsPageState();
 }
 

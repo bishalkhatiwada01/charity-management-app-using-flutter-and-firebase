@@ -6,7 +6,8 @@ class UserTextField extends StatelessWidget {
   final String initialValue;
   final Color textColor;
 
-  UserTextField({
+  const UserTextField({
+    super.key, 
     required this.label,
     required this.initialValue,
     this.textColor = Colors.white,

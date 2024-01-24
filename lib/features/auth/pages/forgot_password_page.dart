@@ -248,8 +248,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     await _authService.resetPassword(_emailController.text);
 
     // Show a message to the user
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Password reset email sent')),
+      const SnackBar(content: Text('Password reset email sent')),
     );
   }
 
@@ -261,11 +262,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         children: [
           TextField(
             controller: _emailController,
-            decoration: InputDecoration(labelText: 'Email'),
+            decoration: const InputDecoration(labelText: 'Email'),
           ),
           ElevatedButton(
             onPressed: _resetPassword,
-            child: Text('Reset Password'),
+            child: const Text('Reset Password'),
           ),
         ],
       ),

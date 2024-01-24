@@ -4,7 +4,8 @@ class CustomLoginButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String buttonText;
 
-  CustomLoginButton({required this.onPressed, this.buttonText = "Login"});
+  const CustomLoginButton(
+      {super.key, required this.onPressed, this.buttonText = "Login"});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CustomLoginButton extends StatelessWidget {
         child: Center(
           child: Text(
             buttonText,
-            style: TextStyle(fontSize: 16, color: Colors.white),
+            style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
         ),
       ),

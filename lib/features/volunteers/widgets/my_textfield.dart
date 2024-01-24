@@ -6,7 +6,8 @@ class CustomTextFieldVolunteer extends StatelessWidget {
   final bool isPassword;
   final FormFieldValidator<String>? validator;
 
-  CustomTextFieldVolunteer({
+  const CustomTextFieldVolunteer({
+    super.key, 
     required this.controller,
     required this.labelText,
     this.isPassword = false,
@@ -21,7 +22,7 @@ class CustomTextFieldVolunteer extends StatelessWidget {
       validator: validator,
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );
   }

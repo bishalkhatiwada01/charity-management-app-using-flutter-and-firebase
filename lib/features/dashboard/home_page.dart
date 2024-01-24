@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ApplicationListPage()));
+                        builder: (context) => const MyApplicationsPage()));
               },
               child: Text(
                 'VolunteerApplications',
@@ -45,7 +46,8 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()));
               },
               child: Text(
                 'ProfilPage',

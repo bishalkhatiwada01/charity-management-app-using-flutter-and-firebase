@@ -13,8 +13,8 @@ class DonateButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onDonatePressed,
       style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).colorScheme.secondary,
-        onPrimary: Theme.of(context).colorScheme.onError,
+        foregroundColor: Theme.of(context).colorScheme.onError,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
       ),
       child: Text('Donate',style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
     );

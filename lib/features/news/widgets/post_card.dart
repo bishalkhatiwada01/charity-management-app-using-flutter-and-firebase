@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class NewsCard extends StatelessWidget {
   final NewsModel news;
 
-  NewsCard({
+  const NewsCard({
+    super.key, 
     required this.news,
   });
 
@@ -24,7 +25,7 @@ class NewsCard extends StatelessWidget {
       },
       child: Card(
         elevation: 4.0,
-        margin: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -32,7 +33,8 @@ class NewsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12.0)),
               child: Image.network(
                 news.urlToImage,
                 height: 200.0,
@@ -43,7 +45,7 @@ class NewsCard extends StatelessWidget {
             ListTile(
               title: Text(
                 news.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),

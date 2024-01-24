@@ -1,3 +1,4 @@
+// ignore_for_file: unused_import
 
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
 import 'package:charity_management_app/features/notifications/notification_page.dart';
@@ -71,7 +72,8 @@ class MyDrawer extends StatelessWidget {
 
                 // navigate to profile page
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                    MaterialPageRoute(
+                    builder: (context) => const ProfilePage()));
               },
             ),
           ),
@@ -110,11 +112,8 @@ class MyDrawer extends StatelessWidget {
               ),
               onTap: () {
                 // pop drawer
-                Navigator.pop(context);
-
-                // navigate to ApplicationPage
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => ApplicationListPage()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MyApplicationsPage()));
               },
             ),
           ),
@@ -130,6 +129,7 @@ class MyDrawer extends StatelessWidget {
               onTap: () async {
                 String result = await userSignout();
                 if (result == "Success") {
+                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),

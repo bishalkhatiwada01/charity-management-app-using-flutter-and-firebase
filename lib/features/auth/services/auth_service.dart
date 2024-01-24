@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,9 +15,13 @@ class AuthService {
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        if (kDebugMode) {
+          print('No user found for that email.');
+        }
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        if (kDebugMode) {
+          print('Wrong password provided for that user.');
+        }
       }
       return null;
     }
@@ -36,7 +41,9 @@ class AuthService {
         'lastname': lastname.trim(),
       });
     } catch (e) {
-      print('Error during registration: $e');
+      if (kDebugMode) {
+        print('Error during registration: $e');
+      }
     }
   }
 
@@ -48,7 +55,9 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print('Error during password reset: $e');
+      if (kDebugMode) {
+        print('Error during password reset: $e');
+      }
     }
   }
 }

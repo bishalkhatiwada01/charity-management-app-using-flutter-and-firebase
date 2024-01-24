@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:charity_management_app/common/widgets/my_custom_button.dart';
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
@@ -25,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
     );
   }
 

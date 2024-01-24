@@ -2,7 +2,6 @@ import 'package:charity_management_app/features/posts/data/post_data_model.dart'
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
 import 'package:charity_management_app/features/posts/widgets/volunteer_button.dart';
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PostDetailsPage extends StatefulWidget {
@@ -19,22 +18,6 @@ class PostDetailsPage extends StatefulWidget {
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
   // for delete data
-  void _deletePost(BuildContext context) async {
-    try {
-      // Delete the post from Firestore
-      await FirebaseFirestore.instance
-          .collection('posts')
-          .doc(widget.postModel.postId)
-          .delete();
-
-      // Navigate back to the homepage after successful deletion
-      Navigator.pop(context);
-    } catch (error) {
-      // Handle any errors that may occur during the deletion
-      print('Error deleting post: $error');
-      // Optionally, show a snackbar or alert the user about the error
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +79,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             ),
                           ),
                           TextSpan(
-                            text: '${widget.postModel.postAddress}',
+                            text: widget.postModel.postAddress,
                             style: TextStyle(
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
@@ -166,18 +149,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           color: Theme.of(context).colorScheme.inversePrimary),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          SizedBox(width: 16.0),
+                          const SizedBox(width: 16.0),
                           VolunteerButton(onVolunteerPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => VolunteerApplicationPage(
                                       postId: widget.postModel.postId,
                                     )));
                           }),
-                          SizedBox(width: 16.0),
+                          const SizedBox(width: 16.0),
                           DonateButton(
                             onDonatePressed: () {
                               // Implement the logic for donation

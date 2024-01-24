@@ -19,7 +19,7 @@ class EditableChipFieldState extends State<EditableChipField> {
   @override
   void initState() {
     super.initState();
-    skills = widget.initialValues ?? [];
+    skills = widget.initialValues;
   }
 
   @override

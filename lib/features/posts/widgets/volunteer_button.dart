@@ -13,8 +13,8 @@ class VolunteerButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onVolunteerPressed,
       style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).colorScheme.secondary,
-        onPrimary: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
       ),
       child: Text('Volunteer',style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
     );

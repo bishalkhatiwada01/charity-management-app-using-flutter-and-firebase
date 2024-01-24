@@ -8,7 +8,8 @@ class DonationHistoryCard extends StatelessWidget {
   final String amount;
   final String campaignName;
 
-  DonationHistoryCard({
+  const DonationHistoryCard({
+    super.key, 
     required this.donationDate,
     required this.amount,
     required this.campaignName,
@@ -31,6 +32,7 @@ class DonationHistoryCard extends StatelessWidget {
       } else {
         // Permission denied
         // You may want to show a message to the user or handle this case accordingly
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Storage permission required for download.'),

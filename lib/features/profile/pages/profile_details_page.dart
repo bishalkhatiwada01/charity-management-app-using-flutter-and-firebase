@@ -6,14 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileDetails extends StatefulWidget {
-  ProfileDetails({super.key, required String title});
+  const ProfileDetails({super.key, required String title});
 
   @override
   State<ProfileDetails> createState() => _ProfileDetailsState();
 }
 
 class _ProfileDetailsState extends State<ProfileDetails> {
-  final _userDb = FirebaseFirestore.instance.collection('users');
   // current logged in user
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
 

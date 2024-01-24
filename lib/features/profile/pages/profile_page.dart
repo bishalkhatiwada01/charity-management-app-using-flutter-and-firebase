@@ -5,19 +5,19 @@ import 'package:charity_management_app/features/profile/widgets/my_profile_listt
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final _userDb = FirebaseFirestore.instance.collection('users');
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
   final ImagePicker _picker = ImagePicker();
   final FirebaseStorage _storage = FirebaseStorage.instance;
@@ -37,6 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
       try {
         await _storage.ref('uploads/$currentUser/profile.jpg').putFile(file);
       } on FirebaseException catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
       }
     }
   }
@@ -148,7 +151,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => ProfileDetails(title: '')));
+                                builder: (_) =>
+                                    const ProfileDetails(title: '')));
                       },
                     ),
                     MyProfileListTile(
@@ -157,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => DonationHistoryPage()));
+                                builder: (_) => const DonationHistoryPage()));
                       },
                     ),
                     MyProfileListTile(

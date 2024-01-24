@@ -52,7 +52,9 @@ class NewsDetailsPage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  TextSpan(text: '${news.author}',style: TextStyle(
+                  TextSpan(
+                    text: news.author,
+                    style: TextStyle(
                     fontStyle: FontStyle.italic,
                     color:
                     Theme.of(context).colorScheme.inversePrimary,
@@ -77,7 +79,9 @@ class NewsDetailsPage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  TextSpan(text: '${news.publishedAt}',style: TextStyle(
+                  TextSpan(
+                    text: news.publishedAt,
+                    style: TextStyle(
                     color:
                     Theme.of(context).colorScheme.inversePrimary,
                     fontSize: 15,
@@ -102,7 +106,9 @@ class NewsDetailsPage extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
-                  TextSpan(text: '${news.description}',style: TextStyle(
+                  TextSpan(
+                    text: news.description,
+                    style: TextStyle(
                     color:
                     Theme.of(context).colorScheme.inversePrimary,
                     fontSize: 16,

@@ -5,13 +5,15 @@ class InterestDropdownWithChipSelector extends StatefulWidget {
   final List<String> availableInterests;
   final Function(List<String>) onSelectionChanged;
 
-  InterestDropdownWithChipSelector({
+  const InterestDropdownWithChipSelector({
+    super.key, 
     required this.selectedInterests,
     required this.availableInterests,
     required this.onSelectionChanged,
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _InterestDropdownWithChipSelectorState createState() =>
       _InterestDropdownWithChipSelectorState();
 }
@@ -24,7 +26,7 @@ class _InterestDropdownWithChipSelectorState
       children: [
         DropdownButtonFormField<String>(
           value: null,
-          hint: Text('Select interests'),
+          hint: const Text('Select interests'),
           items: widget.availableInterests
               .map((interest) => DropdownMenuItem<String>(
                     value: interest,
