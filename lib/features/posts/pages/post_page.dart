@@ -1,7 +1,6 @@
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
 import 'package:charity_management_app/features/posts/data/post_data_source.dart';
 import 'package:charity_management_app/features/posts/widgets/post_card..dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,8 +12,6 @@ class PostPage extends ConsumerStatefulWidget {
 }
 
 class _PostPageState extends ConsumerState<PostPage> {
-  // firestore access
-  // text controller
   final TextEditingController newPostController = TextEditingController();
 
   @override

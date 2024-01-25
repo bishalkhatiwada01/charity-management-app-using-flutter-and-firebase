@@ -3,7 +3,7 @@ class PostData {
   final String postContent;
   final String postAddress;
   final String postContact;
-  final String postImageUrl;
+  final String? postImageUrl;
   final String postDate;
   final String postId;
   PostData({
@@ -11,7 +11,7 @@ class PostData {
     required this.postContent,
     required this.postAddress,
     required this.postContact,
-    required this.postImageUrl,
+    this.postImageUrl,
     required this.postDate,
     required this.postId,
   });

@@ -46,7 +46,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
-                  widget.postModel.postImageUrl,
+                  widget.postModel.postImageUrl!,
                   height: 200.0,
                   width: double.infinity,
                   fit: BoxFit.cover,

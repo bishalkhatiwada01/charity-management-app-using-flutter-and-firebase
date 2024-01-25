@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _PostCardState extends ConsumerState<PostCard> {
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(12.0)),
               child: Image.network(
-                widget.postData.postImageUrl,
+                widget.postData.postImageUrl!,
                 height: 200.0,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -64,7 +65,8 @@ class _PostCardState extends ConsumerState<PostCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.postData.postDate,
+                        // formatDateTime(widget.postData.postDate().toString()),
+                        widget.postData.postAddress,
                         style: const TextStyle(),
                       ),
                     ],
