@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-import 'package:charity_management_app/common/functions/date.dart';
+
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,8 @@ class PostCard extends ConsumerStatefulWidget {
 }
 
 class _PostCardState extends ConsumerState<PostCard> {
+
+  
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -65,8 +67,8 @@ class _PostCardState extends ConsumerState<PostCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        // formatDateTime(widget.postData.postDate().toString()),
-                        widget.postData.postAddress,
+                        widget.postData.postDate.toString(),
+                        // widget.postData.postAddress,
                         style: const TextStyle(),
                       ),
                     ],

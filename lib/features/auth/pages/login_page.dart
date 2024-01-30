@@ -20,10 +20,18 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     if (formKey.currentState!.validate()) {}
 
+
+    void showError(BuildContext context, String message) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
+    }
+    
+
     await _authService.login(
       _emailController.text,
       _passwordController.text,
     );
+    
   }
 
   bool _isPasswordVisible = false;

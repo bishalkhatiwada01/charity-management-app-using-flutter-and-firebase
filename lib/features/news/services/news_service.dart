@@ -1,5 +1,3 @@
-// lib/news/service/news_service.dart
-
 import 'dart:convert';
 import 'package:charity_management_app/features/news/models/news_model.dart';
 import 'package:flutter/services.dart';

@@ -1,4 +1,3 @@
-
 import 'package:charity_management_app/features/profile/widgets/my_profile_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileDetails extends StatefulWidget {
-  const ProfileDetails({super.key, required String title});
+  const ProfileDetails({super.key, required Map<String, dynamic> user});
 
   @override
   State<ProfileDetails> createState() => _ProfileDetailsState();

@@ -47,7 +47,7 @@ class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
                         horizontal: 10.0, vertical: 6.0),
                     child: Container(
                       decoration: const BoxDecoration(
-                          color: Color.fromRGBO(129, 156, 207, 0.898)),
+                          color: Color.fromRGBO(100, 102, 106, 0.894)),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),

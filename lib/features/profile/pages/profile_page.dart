@@ -1,185 +1,210 @@
-import 'dart:io';
 import 'package:charity_management_app/features/profile/pages/donation_history_page.dart';
 import 'package:charity_management_app/features/profile/pages/profile_details_page.dart';
-import 'package:charity_management_app/features/profile/widgets/my_profile_listtile.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
+import 'package:charity_management_app/features/profile/service/get_user_service.dart';
+import 'package:charity_management_app/features/profile/widgets/list_tile.dart';
+import 'package:charity_management_app/features/volunteers/pages/volunteer_history_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
-
+class ProfilePage extends ConsumerWidget {
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
+  Widget build(BuildContext context, ref) {
+    final userDataAsyncValue = ref.watch(userProvider);
 
-class _ProfilePageState extends State<ProfilePage> {
-  final currentUser = FirebaseAuth.instance.currentUser!.uid;
-  final ImagePicker _picker = ImagePicker();
-  final FirebaseStorage _storage = FirebaseStorage.instance;
-
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-    final data = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser)
-        .get();
-    return data;
-  }
-  Future<void> _uploadImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      File file = File(image.path);
-      try {
-        await _storage.ref('uploads/$currentUser/profile.jpg').putFile(file);
-      } on FirebaseException catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           'PROFILE',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.inversePrimary,
-            letterSpacing: 4,
-          ),
+              color: Theme.of(context).colorScheme.inversePrimary,
+              letterSpacing: 4),
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        centerTitle: true,
         iconTheme:
             IconThemeData(color: Theme.of(context).colorScheme.inversePrimary),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: FutureBuilder(
-        future: getUserDetails(),
-        builder: (context, snapshot) {
-          // loading
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          // error
-          else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
-
-          // data recieved
-          else if (snapshot.hasData) {
-            Map<String, dynamic>? user = snapshot.data?.data();
-
-            return SingleChildScrollView(
-              child: Center(
-                child: Column(
+      body: userDataAsyncValue.when(
+        data: (userData) {
+          final Map<String, dynamic> user = userData.data()!;
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 25,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 25.h),
-                    Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        CircleAvatar(
-                          radius: 60.0, // Adjust the radius as needed
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          child: Icon(
-                            Icons.person,
-                            size: 60.sp,
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: _uploadImage,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              radius: 12.0, // Adjust the radius as needed
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .secondary, // Change color as needed
-                              child: Icon(
-                                Icons.camera_alt_outlined,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary,
-                                size: 20.sp,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 15.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          user?['firstname'] ?? 'default name',
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 5.w),
-                        Text(
-                          user?['lastname'] ?? 'default name',
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    MyProfileListTile(
-                      title: 'Personal Information',
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) =>
-                                    const ProfileDetails(title: '')));
-                      },
-                    ),
-                    MyProfileListTile(
-                      title: 'Donation History',
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const DonationHistoryPage()));
-                      },
-                    ),
-                    MyProfileListTile(
-                      title: 'Volunteer History',
-                      onTap: () {},
-                    ),
-                    MyProfileListTile(
-                      title: 'Payment Information',
-                      onTap: () {},
+                    CircleAvatar(
+                      maxRadius: 65,
+                      backgroundImage: AssetImage("assets/6195145.jpg"),
                     ),
                   ],
                 ),
-              ),
-            );
-          } else {
-            return const Text('No data');
-          }
+                const SizedBox(
+                  height: 10,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/download.png"),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    CircleAvatar(
+                      backgroundImage:
+                          AssetImage("assets/GooglePlus-logo-red.png"),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    CircleAvatar(
+                      backgroundImage: AssetImage(
+                          "assets/1_Twitter-new-icon-mobile-app.jpg"),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    CircleAvatar(
+                      backgroundImage:
+                          AssetImage("assets/600px-LinkedIn_logo_initials.png"),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      user['firstname'] + ' ' + user['lastname'],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900, fontSize: 22),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      user['email'],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  margin: const EdgeInsets.only(left: 12, right: 12),
+                  child: Column(
+                    children: [
+                      // cards for profile
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileDetails(
+                                        user: user,
+                                      )));
+                        },
+                        title: 'Personal Information',
+                        leading: const Icon(
+                          Icons.privacy_tip_sharp,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DonationHistoryPage(),
+                            ),
+                          );
+                        },
+                        title: 'Donation History',
+                        leading: const Icon(
+                          Icons.history,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      VolunteerHistoryPage()));
+                        },
+                        title: 'Volunteer History',
+                        leading: const Icon(
+                          Icons.history,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/help_support');
+                        },
+                        title: 'Help & Support',
+                        leading: const Icon(
+                          Icons.help_outline,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/invite_friend');
+                        },
+                        title: 'Invite a Friend',
+                        leading: const Icon(
+                          Icons.add_reaction_sharp,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+
+                      MyCardProfile(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/logout');
+                        },
+                        title: 'Logout',
+                        leading: const Icon(
+                          Icons.logout,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+
+                      const SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
         },
+        error: (error, stackTrace) {
+          return null;
+        },
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

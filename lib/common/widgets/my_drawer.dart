@@ -4,8 +4,8 @@ import 'package:charity_management_app/features/auth/pages/login_page.dart';
 import 'package:charity_management_app/features/notifications/notification_page.dart';
 import 'package:charity_management_app/features/profile/pages/profile_page.dart';
 import 'package:charity_management_app/features/volunteers/pages/application_list_page.dart';
-import 'package:charity_management_app/features/volunteers/pages/my_application_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,7 +51,13 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(
                 Icons.home,
               ),
-              title: const Text('H O M E'),
+              title: const Text(
+                'HOME',
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 4,
+                ),
+              ),
               onTap: () {
                 // navigate to home page
                 Navigator.pop(context);
@@ -66,15 +72,20 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(
                 Icons.person,
               ),
-              title: const Text('P R O F I L E'),
+              title: const Text(
+                'PROFILE',
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 4,
+                ),
+              ),
               onTap: () {
                 // pop drawer
                 Navigator.pop(context);
 
                 // navigate to profile page
                 Navigator.of(context).push(
-                    MaterialPageRoute(
-                    builder: (context) => const ProfilePage()));
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
               },
             ),
           ),
@@ -86,7 +97,13 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(
                 Icons.newspaper_outlined,
               ),
-              title: const Text('N O T I F I C A T I O N '),
+              title: const Text(
+                'NOTIFICATION ',
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 4,
+                ),
+              ),
               onTap: () {
                 // pop drawer
                 Navigator.pop(context);
@@ -103,11 +120,12 @@ class MyDrawer extends StatelessWidget {
             padding: EdgeInsets.only(left: 20.w),
             child: ListTile(
               leading: const Icon(
-                Icons.newspaper_outlined,
+                Icons.notifications_active,
               ),
               title: const Text(
-                'APPLICATIONS',
+                ' MY APPLICATION',
                 style: TextStyle(
+                  fontSize: 14,
                   letterSpacing: 4,
                 ),
               ),
@@ -126,7 +144,13 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(
                 Icons.logout,
               ),
-              title: const Text('L O G O U T'),
+              title: const Text(
+                'LOGOUT',
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 4,
+                ),
+              ),
               onTap: () async {
                 String result = await userSignout();
                 if (result == "Success") {
@@ -135,7 +159,11 @@ class MyDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
-                } else {}
+                } else {
+                  if (kDebugMode) {
+                    print('Logout Failed');
+                  }
+                }
               },
             ),
           ),
