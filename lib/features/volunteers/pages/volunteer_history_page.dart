@@ -8,7 +8,14 @@ class VolunteerHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Volunteer History'),
+        iconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.inversePrimary),
+        title: Text(
+          'Volunteer History',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+        ),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
