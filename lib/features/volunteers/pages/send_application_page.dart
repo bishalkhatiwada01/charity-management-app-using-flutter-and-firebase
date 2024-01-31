@@ -167,6 +167,7 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
                 EditableChipField(
                   initialValues: selectedSkills,
                   onChanged: (List<String> items) {
+                    
                     setState(() {
                       selectedSkills = items;
                     });
