@@ -4,6 +4,7 @@ import 'package:charity_management_app/features/posts/data/post_data_model.dart'
 import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostCard extends ConsumerStatefulWidget {
   final PostData postData;
@@ -17,8 +18,6 @@ class PostCard extends ConsumerStatefulWidget {
 }
 
 class _PostCardState extends ConsumerState<PostCard> {
-
-  
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -71,6 +70,15 @@ class _PostCardState extends ConsumerState<PostCard> {
                         // widget.postData.postAddress,
                         style: const TextStyle(),
                       ),
+                      IconButton(
+                          onPressed: () {
+                            Share.share(widget.postData.postHeadline! +
+                                '\n' +
+                                widget.postData.postAddress! +
+                                '\n' +
+                                widget.postData.postImageUrl!);
+                          },
+                          icon: Icon(Icons.share))
                     ],
                   ),
                 ],

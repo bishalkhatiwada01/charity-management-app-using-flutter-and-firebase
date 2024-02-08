@@ -1,5 +1,6 @@
 
 import 'package:charity_management_app/features/news/models/news_model.dart';
+import 'package:charity_management_app/features/posts/pages/full_screen_image.dart';
 import 'package:flutter/material.dart';
 
 class NewsDetailsPage extends StatelessWidget {
@@ -30,8 +31,26 @@ class NewsDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(news.urlToImage),
-            const SizedBox(height: 16.0),
+            GestureDetector(
+              onTap: () {
+                // Handle onTap event to navigate to full-screen image page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FullScreenImage(imageUrl: news.urlToImage),
+                  ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
+                child: Image.network(
+                  news.urlToImage,
+                  height: 200.0,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),            const SizedBox(height: 16.0),
             Text(
               news.title,
               style:

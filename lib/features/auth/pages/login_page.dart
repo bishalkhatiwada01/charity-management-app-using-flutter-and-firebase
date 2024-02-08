@@ -228,6 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 20.h,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Checkbox(
                                 fillColor: MaterialStateProperty.all<Color>(
@@ -255,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 32.w,
+                                    width: 15.w,
                                   ),
                                   TextButton(
                                       onPressed: () {

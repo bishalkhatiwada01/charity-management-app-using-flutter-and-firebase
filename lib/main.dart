@@ -59,7 +59,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final _pages = [
-    const HomePage(),
+    HomePage(),
     const PostPage(),
     const NewsPage(),
     const NotificationPage()

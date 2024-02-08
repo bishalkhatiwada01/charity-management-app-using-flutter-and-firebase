@@ -1,4 +1,5 @@
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
+import 'package:charity_management_app/features/posts/pages/full_screen_image.dart';
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
 import 'package:charity_management_app/features/posts/widgets/volunteer_button.dart';
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
@@ -46,14 +47,24 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(12.0)),
-                child: Image.network(
-                  widget.postModel.postImageUrl!,
-                  height: 200.0,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  // Handle onTap event to navigate to full-screen image page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FullScreenImage(imageUrl: widget.postModel.postImageUrl!),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
+                  child: Image.network(
+                    widget.postModel.postImageUrl!,
+                    height: 200.0,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(

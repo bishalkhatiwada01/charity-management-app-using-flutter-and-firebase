@@ -18,7 +18,7 @@ Future<void> handleBackgroundMessage(RemoteMessage? message) async {
     if (route == "post") {
       navigatorKey.currentState?.push(
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => HomePage(),
         ),
       );
     } else if (route == "order") {
