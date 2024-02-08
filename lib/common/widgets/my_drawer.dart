@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
-import 'package:charity_management_app/features/notifications/notification_page.dart';
+import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';
 import 'package:charity_management_app/features/profile/pages/profile_page.dart';
 import 'package:charity_management_app/features/volunteers/pages/application_list_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';

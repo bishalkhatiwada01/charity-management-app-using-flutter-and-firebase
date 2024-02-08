@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final userDb = FirebaseFirestore.instance.collection('users');
 
   Future<UserCredential?> login(String email, String password) async {
     try {
@@ -12,6 +14,13 @@ class AuthService {
         email: email,
         password: password,
       );
+      final token = await FirebaseMessaging.instance.getToken();
+      final userData = await userDb.doc(userCredential.user!.uid).get();
+      await userDb.doc(userCredential.user!.uid).update({
+        'email': userData['email'],
+        'token': token,
+      });
+
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -35,10 +44,12 @@ class AuthService {
         email: email.trim(),
         password: password.trim(),
       );
+      final token = await FirebaseMessaging.instance.getToken();
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'email': email.trim(),
         'firstname': firstname.trim(),
         'lastname': lastname.trim(),
+        'token': token,
       });
     } catch (e) {
       if (kDebugMode) {
