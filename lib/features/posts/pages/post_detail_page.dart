@@ -3,6 +3,7 @@ import 'package:charity_management_app/features/posts/widgets/donate_button.dart
 import 'package:charity_management_app/features/posts/widgets/volunteer_button.dart';
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final PostData postModel;
@@ -29,7 +30,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
         elevation: 0,
         title: const Text(
           'POSTS DETAILS',
-          style: TextStyle(letterSpacing: 4),
+          style: TextStyle(
+            letterSpacing: 4,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -75,12 +79,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
                               fontSize: 18,
                             ),
                           ),
                           TextSpan(
                             text: widget.postModel.postAddress,
                             style: TextStyle(
+                              fontStyle: FontStyle.italic,
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
@@ -95,6 +101,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           TextSpan(
                             text: 'Date: ',
                             style: TextStyle(
+                              fontStyle: FontStyle.italic,
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
@@ -104,6 +111,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           TextSpan(
                             text: widget.postModel.postDate,
                             style: TextStyle(
+                              fontStyle: FontStyle.italic,
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
@@ -118,6 +126,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           TextSpan(
                             text: 'Contact no: ',
                             style: TextStyle(
+                              fontStyle: FontStyle.italic,
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                               fontWeight: FontWeight.bold,
@@ -127,6 +136,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           TextSpan(
                             text: widget.postModel.postContact,
                             style: TextStyle(
+                              fontStyle: FontStyle.italic,
                               color:
                                   Theme.of(context).colorScheme.inversePrimary,
                             ),
@@ -135,18 +145,151 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                       ),
                     ),
                     const SizedBox(height: 8.0),
-                    Text(
-                      'Discreption:',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Description: ',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.postModel.postContent,
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      widget.postModel.postContent,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary),
+                    SizedBox(height: 18.h),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      child: ExpansionTile(
+                        iconColor: Theme.of(context).colorScheme.inversePrimary,
+                        tilePadding: EdgeInsets.symmetric(horizontal: 8.w),
+                        shape: const BeveledRectangleBorder(
+                          side: BorderSide.none,
+                        ),
+                        title: Text(
+                          'For Volunteer:',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp,
+                          ),
+                        ),
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Interests: ',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: widget.postModel.interests
+                                            .join(", "),
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Qualifications: ',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: widget.postModel.qualifications
+                                            .join(", "),
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Skills: ',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            widget.postModel.skills.join(", "),
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -162,9 +305,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           }),
                           const SizedBox(width: 16.0),
                           DonateButton(
-                            onDonatePressed: () {
-                              // Implement the logic for donation
-                            },
+                            onDonatePressed: () {},
                           ),
                         ],
                       ),

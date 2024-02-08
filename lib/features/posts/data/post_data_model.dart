@@ -8,6 +8,11 @@ class PostData {
   final String? postImageUrl;
   final String postDate;
   final String postId;
+  String khaltiNo;
+  List<String> skills;
+  List<String> interests;
+  List<String> qualifications;
+
   PostData({
     required this.postHeadline,
     required this.postContent,
@@ -16,6 +21,10 @@ class PostData {
     this.postImageUrl,
     required this.postDate,
     required this.postId,
+    required this.khaltiNo,
+    required this.skills,
+    required this.interests,
+    required this.qualifications,
   });
 
   factory PostData.fromJson(Map<String, dynamic> json) {
@@ -27,6 +36,10 @@ class PostData {
       postContact: json['postContact'],
       postId: json['postId'],
       postDate: json['postCreatedAt'],
+      khaltiNo: json['khaltiNo'],
+      skills: List<String>.from(json['skills']),
+      interests: List<String>.from(json['interests']),
+      qualifications: List<String>.from(json['qualifications']),
     );
   }
 }

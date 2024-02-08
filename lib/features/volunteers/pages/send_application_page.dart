@@ -1,10 +1,7 @@
 import 'package:charity_management_app/common/widgets/my_button.dart';
+import 'package:charity_management_app/features/volunteers/data/volunteer_data_source.dart';
 import 'package:charity_management_app/features/volunteers/widgets/custom_textfield.dart';
-import 'package:charity_management_app/features/volunteers/widgets/editable_input_chip.dart';
-
 import 'package:charity_management_app/features/volunteers/widgets/my_experience_button.dart';
-import 'package:charity_management_app/features/volunteers/widgets/my_interest_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,27 +14,24 @@ class VolunteerApplicationPage extends StatefulWidget {
     required this.postId,
   });
   @override
-  // ignore: library_private_types_in_public_api
   _VolunteerApplicationPageState createState() =>
       _VolunteerApplicationPageState();
 }
 
 class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
-  
-
-
-  final _firestore = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
-
 
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _contactNumberController =
       TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _qualificationController =
+  final TextEditingController volunteerSkillsController =
       TextEditingController();
-  final TextEditingController _skillsController = TextEditingController();
+  final TextEditingController volunteerQualifiController =
+      TextEditingController();
+  final TextEditingController volunteerIntersController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -55,26 +49,23 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
       _formKey.currentState!.save();
 
       try {
-        await _firestore.collection('volunteer_applications').add({
-          'volunteerFullName': _fullNameController.text,
-          'volunteerEmail': _emailController.text,
-          'volunteerContactNumber': _contactNumberController.text,
-          'volunteerAddress': _addressController.text,
-          'volunteerQualification': _qualificationController.text,
-          'volunteerSkills': selectedSkills,
-          'volunteerInterests': selectedInterests,
-          'volunteerDate': DateTime.now().toIso8601String(),
-          'userId': userId,
-          'postId': widget.postId,
-          'volunteerExperience': _selectedExperience,
-        });
+        await VolunteerDataService().submitApplication(
+          fullName: _fullNameController.text,
+          email: _emailController.text,
+          contactNumber: _contactNumberController.text,
+          address: _addressController.text,
+          interests: volunteerSkillsController.text.split(','),
+          qualification: volunteerQualifiController.text.split(','),
+          skills: volunteerIntersController.text.split(','),
+          userId: userId,
+          postId: widget.postId,
+          experience: _selectedExperience,
+        );
 
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Application submitted successfully')),
         );
       } catch (e) {
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to submit application: $e')),
         );
@@ -88,9 +79,17 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
     _emailController.dispose();
     _contactNumberController.dispose();
     _addressController.dispose();
-    _qualificationController.dispose();
-    _skillsController.dispose();
+    volunteerSkillsController.dispose();
+    volunteerQualifiController.dispose();
+    volunteerIntersController.dispose();
     super.dispose();
+  }
+
+  String? _validateTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    }
+    return null;
   }
 
   @override
@@ -113,7 +112,7 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h),
+          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
           child: Form(
             key: _formKey,
             child: Column(
@@ -122,36 +121,19 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
                 CustomTextField(
                   labelText: 'Full Name',
                   controller: _fullNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your full name';
-                    }
-                    return null;
-                  },
+                  validator: _validateTextField,
                 ),
                 SizedBox(height: 20.h),
                 CustomTextField(
                   labelText: 'Email',
                   controller: _emailController,
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        !RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
+                  validator: _validateTextField,
                 ),
                 SizedBox(height: 20.h),
                 CustomTextField(
                   labelText: 'Contact No',
                   controller: _contactNumberController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your contact number';
-                    }
-                    return null;
-                  },
+                  validator: _validateTextField,
                 ),
                 SizedBox(height: 20.h),
                 CustomTextField(
@@ -160,45 +142,21 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
                 ),
                 SizedBox(height: 20.h),
                 CustomTextField(
-                  labelText: 'Qualification',
-                  controller: _qualificationController,
+                  validator: _validateTextField,
+                  controller: volunteerSkillsController,
+                  labelText: 'Skills',
                 ),
-                SizedBox(height: 20.h),
-                EditableChipField(
-                  initialValues: selectedSkills,
-                  onChanged: (List<String> items) {
-                    
-                    setState(() {
-                      selectedSkills = items;
-                    });
-                  },
+                SizedBox(height: 10.h),
+                CustomTextField(
+                  validator: _validateTextField,
+                  controller: volunteerQualifiController,
+                  labelText: 'Qualifications',
                 ),
-
-                SizedBox(height: 20.h),
-                InterestDropdownWithChipSelector(
-                  availableInterests: const [
-                    'Teaching',
-                    'Fundraising',
-                    'Marketing',
-                    'Social Media',
-                    'Event Management',
-                    'Content Writing',
-                    'Photography',
-                    'Video Editing',
-                    'Graphic Designing',
-                    'Web Development',
-                    'App Development',
-                    'UI/UX Designing',
-                    'Data Entry',
-                    'Translation',
-                    'Other',
-                  ],
-                  selectedInterests: selectedInterests,
-                  onSelectionChanged: (selected) {
-                    setState(() {
-                      selectedInterests = selected;
-                    });
-                  },
+                SizedBox(height: 10.h),
+                CustomTextField(
+                  validator: _validateTextField,
+                  controller: volunteerIntersController,
+                  labelText: 'Interests',
                 ),
                 SizedBox(height: 20.h),
                 MyExperienceDropDownButton(

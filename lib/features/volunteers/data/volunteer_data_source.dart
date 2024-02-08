@@ -1,16 +1,41 @@
 import 'dart:async';
-
-import 'package:charity_management_app/features/posts/data/post_data_source.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'volunteer_data_model.dart';
 
 final volunteerApplicationProvider = FutureProvider<List<VolunteerApplication>>(
-  (ref) => DataService().getApplication(),
+  (ref) => VolunteerDataService().getApplication(),
 );
 
-final class DataService {
+final class VolunteerDataService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  Future<void> submitApplication({
+    required String fullName,
+    required String email,
+    required String contactNumber,
+    required String address,
+    required List<String> qualification,
+    required List<String> skills,
+    required List<String> interests,
+    required String userId,
+    required String postId,
+    required String? experience,
+  }) async {
+    await _db.collection('volunteer_applications').add({
+      'volunteerFullName': fullName,
+      'volunteerEmail': email,
+      'volunteerContactNumber': contactNumber,
+      'volunteerAddress': address,
+      'volunteerQualification': qualification,
+      'volunteerSkills': skills,
+      'volunteerInterests': interests,
+      'volunteerDate': DateTime.now().toIso8601String(),
+      'userId': userId,
+      'postId': postId,
+      'volunteerExperience': experience,
+    });
+  }
 
   Future<List<VolunteerApplication>> getApplication() async {
     try {
