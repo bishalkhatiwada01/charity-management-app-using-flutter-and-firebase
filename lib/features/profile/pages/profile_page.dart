@@ -6,6 +6,7 @@ import 'package:charity_management_app/features/volunteers/pages/volunteer_histo
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ProfilePage extends ConsumerWidget {
   @override
@@ -155,7 +156,7 @@ class ProfilePage extends ConsumerWidget {
 
                       MyCardProfile(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/help_support');
+                          Navigator.pushNamed(context, '/help-support');
                         },
                         title: 'Help & Support',
                         leading: const Icon(
@@ -167,7 +168,7 @@ class ProfilePage extends ConsumerWidget {
 
                       MyCardProfile(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/invite_friend');
+                          Share.share('https://charitymanagementapp.com');
                         },
                         title: 'Invite a Friend',
                         leading: const Icon(

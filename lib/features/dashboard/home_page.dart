@@ -1,6 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:charity_management_app/common/widgets/my_bottom_navbar.dart';
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
+import 'package:charity_management_app/features/news/pages/news_page.dart';
+import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';
 import 'package:charity_management_app/features/posts/data/post_data_source.dart';
+import 'package:charity_management_app/features/posts/pages/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:mchango/utils/constants.dart';
@@ -26,6 +30,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     ' Help to make change ',
   ];
   int _currentIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -559,6 +564,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
+      
+      
     );
+  
+  
+
+  
+  
   }
 }

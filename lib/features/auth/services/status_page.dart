@@ -1,5 +1,6 @@
 
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
+import 'package:charity_management_app/features/dashboard/home_page.dart';
 import 'package:charity_management_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
