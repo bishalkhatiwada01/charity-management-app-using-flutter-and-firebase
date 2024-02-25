@@ -1,13 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:charity_management_app/common/widgets/my_bottom_navbar.dart';
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
-import 'package:charity_management_app/features/news/pages/news_page.dart';
-import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';
-import 'package:charity_management_app/features/posts/data/post_data_source.dart';
-import 'package:charity_management_app/features/posts/pages/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:mchango/utils/constants.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,12 +25,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   ];
   int _currentIndex = 0;
 
-
   @override
   Widget build(BuildContext context) {
-    final postData = ref.watch(postProvider);
-    Size? size = MediaQuery.of(context).size;
-
+    // final postData = ref.watch(postProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -60,7 +51,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -107,7 +98,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   left: 10,
                                   bottom: 10,
                                   child: Text(
-                                    '${titles[_currentIndex]}',
+                                    titles[_currentIndex],
                                     style: const TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
@@ -125,436 +116,435 @@ class _HomePageState extends ConsumerState<HomePage> {
                     .toList(),
               ),
 
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Urgent Fundraising',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600)),
-                          Text(
-                            'See all',
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Urgent Fundraising',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          )
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600)),
+                        Text(
+                          'See all',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 230,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 200,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15.0),
+                                      topRight: Radius.circular(15.0),
+                                    ),
+                                    child: Image.asset('assets/Image1.png')),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      const Text(
+                                        'Assist with Surgical',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const LinearProgressIndicator(
+                                        color: Colors.black,
+                                        backgroundColor: Colors.grey,
+                                        value: 0.8,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          RichText(
+                                            text: const TextSpan(
+                                              // Note: Styles for TextSpans must be explicitly defined.
+                                              // Child text spans will inherit styles from parent
+                                              style: TextStyle(
+                                                fontSize: 12.0,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: "1,859",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: 'Donors',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          RichText(
+                                            text: const TextSpan(
+                                              style: TextStyle(
+                                                fontSize: 12.0,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: "3",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: ' Days left',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 200,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(15.0),
+                                      topRight: Radius.circular(15.0),
+                                    ),
+                                    child:
+                                        Image.asset('assets/food_need.jpeg')),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      const Text(
+                                        'Assist with Food',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const LinearProgressIndicator(
+                                        color: Colors.black,
+                                        backgroundColor: Colors.grey,
+                                        value: 0.8,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          RichText(
+                                            text: const TextSpan(
+                                              // Note: Styles for TextSpans must be explicitly defined.
+                                              // Child text spans will inherit styles from parent
+                                              style: TextStyle(
+                                                fontSize: 12.0,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: "1,859",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: ' Donators',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          RichText(
+                                            text: const TextSpan(
+                                              // Note: Styles for TextSpans must be explicitly defined.
+                                              // Child text spans will inherit styles from parent
+                                              style: TextStyle(
+                                                fontSize: 12.0,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: "5",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: ' Days left',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        height: 230,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(15.0),
-                                        topRight: Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset('assets/Image1.png')),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        const Text(
-                                          'Assist with Surgical',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const LinearProgressIndicator(
-                                          color: Colors.black,
-                                          backgroundColor: Colors.grey,
-                                          value: 0.8,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            RichText(
-                                              text: const TextSpan(
-                                                // Note: Styles for TextSpans must be explicitly defined.
-                                                // Child text spans will inherit styles from parent
-                                                style: TextStyle(
-                                                  fontSize: 12.0,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: "1,859",
-                                                    style: TextStyle(
-                                                      color: Colors.green,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' Donators',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: const TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: 12.0,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: "3",
-                                                    style: TextStyle(
-                                                      color: Colors.green,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' Days left',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(15.0),
-                                        topRight: Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset('assets/Image1.png')),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        const Text(
-                                          'Assist with Food',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const LinearProgressIndicator(
-                                          color: Colors.black,
-                                          backgroundColor: Colors.grey,
-                                          value: 0.8,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            RichText(
-                                              text: const TextSpan(
-                                                // Note: Styles for TextSpans must be explicitly defined.
-                                                // Child text spans will inherit styles from parent
-                                                style: TextStyle(
-                                                  fontSize: 12.0,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: "1,859",
-                                                    style: TextStyle(
-                                                      color: Colors.green,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' Donators',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: const TextSpan(
-                                                // Note: Styles for TextSpans must be explicitly defined.
-                                                // Child text spans will inherit styles from parent
-                                                style: TextStyle(
-                                                  fontSize: 12.0,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: "",
-                                                    style: TextStyle(
-                                                      color: Colors.green,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' Days left',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Watch the Impacts',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600)),
-                          Text(
-                            'See all',
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Watch the Impacts',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
-                          )
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600)),
+                        Text(
+                          'See all',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 180,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/charity_image4.jpg',
+                                      width: 130,
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                    )),
+                                const Positioned(
+                                  left: 5,
+                                  bottom: 10,
+                                  child: Text(
+                                    'Volunteers',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        backgroundColor: Colors.black26),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/charity_image3.jpg',
+                                      width: 130,
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                    )),
+                                const Positioned(
+                                  left: 5,
+                                  bottom: 10,
+                                  child: Text(
+                                    'Volunteer needs',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        backgroundColor: Colors.black26),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/charity_image2.jpg',
+                                      width: 130,
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                    )),
+                                const Positioned(
+                                  left: 5,
+                                  bottom: 10,
+                                  child: Text(
+                                    'Provided Help',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        backgroundColor: Colors.black26),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 130,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid,
+                                    width: 1.0),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/charity_image1.jpg',
+                                      width: 130,
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                    )),
+                                const Positioned(
+                                  left: 5,
+                                  bottom: 10,
+                                  child: Text(
+                                    'Supplied Food',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        backgroundColor: Colors.black26),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        height: 180,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/image-1.png',
-                                        width: 130,
-                                        height: 180,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  const Positioned(
-                                    left: 5,
-                                    bottom: 10,
-                                    child: Text(
-                                      'Sarah\'s surgery',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          backgroundColor: Colors.black26),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/image-1.png',
-                                        width: 130,
-                                        height: 180,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  const Positioned(
-                                    left: 5,
-                                    bottom: 10,
-                                    child: Text(
-                                      'Sarah\'s surgery',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          backgroundColor: Colors.black26),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/image-1.png',
-                                        width: 130,
-                                        height: 180,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  const Positioned(
-                                    left: 5,
-                                    bottom: 10,
-                                    child: Text(
-                                      'Sarah\'s surgery',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          backgroundColor: Colors.black26),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      style: BorderStyle.solid,
-                                      width: 1.0),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15.0),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/image-1.png',
-                                        width: 130,
-                                        height: 180,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  const Positioned(
-                                    left: 5,
-                                    bottom: 10,
-                                    child: Text(
-                                      'Sarah\'s surgery',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          backgroundColor: Colors.black26),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -564,13 +554,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
-      
-      
     );
-  
-  
-
-  
-  
   }
 }

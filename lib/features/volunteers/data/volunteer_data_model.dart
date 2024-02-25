@@ -8,10 +8,10 @@ class VolunteerApplication {
   final String volunteerAddress;
   final Volunteer volunteer;
   final Post post;
-  String? volunteerQualification;
+  List<String>? volunteerQualification;
   final String volunteerCreatedAt;
   final String volunteerContactNum;
-List<String>? volunteerSkills;
+  List<String>? volunteerSkills;
 
   VolunteerApplication({
     required this.userId,
@@ -29,21 +29,45 @@ List<String>? volunteerSkills;
     this.volunteerSkills,
   });
 
+  // factory VolunteerApplication.fromJson(Map<String, dynamic> json) {
+  //   return VolunteerApplication(
+  //     userId: json['userId'],
+  //     postId: json['postId'],
+  //     volunteerEmail: json['volunteerEmail'],
+  //     volunteerName: json['volunteerFullName'],
+  //     volunteerContactNum: json['volunteerContactNumber'],
+  //     volunteerInterests: json['volunteerInterests'],
+  //     volunteerExperience: json['volunteerExperience'],
+  //     volunteerQualification: json['volunteerQualification'],
+  //     volunteerAddress: json['volunteerAddress'],
+  //     volunteer: json['volunteer'],
+  //     post: json['posts'],
+  //     volunteerCreatedAt: json['volunteerDate'],
+  //     volunteerSkills: json['volunteerSkills'],
+  //   );
+  // }
+
   factory VolunteerApplication.fromJson(Map<String, dynamic> json) {
     return VolunteerApplication(
       userId: json['userId'],
       postId: json['postId'],
-      volunteerEmail: json['volunteerEmail'],
       volunteerName: json['volunteerFullName'],
-      volunteerContactNum: json['volunteerContactNumber'],
-      volunteerInterests: List<String>.from(json['volunteerInterests']),
+      volunteerEmail: json['volunteerEmail'],
+      volunteerInterests: (json['volunteerInterests'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
       volunteerExperience: json['volunteerExperience'],
-      volunteerQualification: json['volunteerQualification'],
       volunteerAddress: json['volunteerAddress'],
       volunteer: json['volunteer'],
       post: json['posts'],
+      volunteerQualification: (json['volunteerQualification'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
       volunteerCreatedAt: json['volunteerDate'],
-      volunteerSkills: List<String>.from(json['volunteerSkills']),
+      volunteerContactNum: json['volunteerContactNumber'],
+      volunteerSkills: (json['volunteerSkills'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
     );
   }
 }

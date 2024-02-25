@@ -40,7 +40,7 @@ class _PostPageState extends ConsumerState<PostPage> {
                     shrinkWrap: true,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                      final posts = data![index];
+                      final posts = data[index];
 
                       return PostCard(
                         postData: posts,

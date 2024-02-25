@@ -2,7 +2,6 @@ import 'package:charity_management_app/api/fiebase_api.dart';
 import 'package:charity_management_app/common/themes/dark_theme.dart';
 import 'package:charity_management_app/common/themes/light_theme.dart';
 import 'package:charity_management_app/common/widgets/my_bottom_navbar.dart';
-import 'package:charity_management_app/features/auth/services/status_page.dart';
 import 'package:charity_management_app/features/dashboard/home_page.dart';
 import 'package:charity_management_app/features/dashboard/splash_screen.dart';
 import 'package:charity_management_app/features/news/pages/news_page.dart';
@@ -60,7 +59,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final _pages = [
-    HomePage(),
+    const HomePage(),
     const PostPage(),
     const NewsPage(),
     const NotificationPage()

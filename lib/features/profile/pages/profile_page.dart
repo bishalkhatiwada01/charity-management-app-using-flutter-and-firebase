@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ProfilePage extends ConsumerWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context, ref) {
     final userDataAsyncValue = ref.watch(userProvider);
@@ -144,7 +146,7 @@ class ProfilePage extends ConsumerWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      VolunteerHistoryPage()));
+                                      const VolunteerHistoryPage()));
                         },
                         title: 'Volunteer History',
                         leading: const Icon(

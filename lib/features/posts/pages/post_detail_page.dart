@@ -1,3 +1,4 @@
+import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/pages/full_screen_image.dart';
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
@@ -120,7 +121,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             ),
                           ),
                           TextSpan(
-                            text: widget.postModel.postDate,
+                            text: formatDateTime(
+                              widget.postModel.postDate,
+                            ), 
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               color:

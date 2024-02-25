@@ -1,4 +1,3 @@
-
 import 'package:charity_management_app/common/widgets/my_custom_button.dart';
 import 'package:charity_management_app/features/auth/pages/forgot_password_page.dart';
 import 'package:charity_management_app/features/auth/pages/sign_up_page.dart';
@@ -20,18 +19,17 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     if (formKey.currentState!.validate()) {}
 
-
-    void showError(BuildContext context, String message) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(message)));
-    }
-    
-
-    await _authService.login(
+    final response = await _authService.login(
       _emailController.text,
       _passwordController.text,
     );
-    
+
+    if (response != null) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        '/home',
+        (route) => false,
+      );
+    }
   }
 
   bool _isPasswordVisible = false;
@@ -135,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                                 Icons.email_outlined,
                                 color: Colors.white,
                               ),
-                              
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),

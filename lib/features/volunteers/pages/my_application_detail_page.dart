@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ApplicationDetailPage extends ConsumerStatefulWidget {
   final VolunteerApplication application;
 
-  ApplicationDetailPage({super.key, required this.application});
+  const ApplicationDetailPage({super.key, required this.application});
 
   @override
   ConsumerState<ApplicationDetailPage> createState() =>
@@ -81,7 +81,7 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                       label: 'email',
                       value: applicationData.volunteerEmail,
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     LabelValueWidget(
                       label: 'Address',
                       value: applicationData.volunteerAddress,
@@ -99,7 +99,7 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                     const SizedBox(height: 8.0),
                     LabelValueWidget(
                       label: 'Qualification',
-                      value: applicationData.volunteerQualification!,
+                      value: applicationData.volunteerQualification!.join(', '),
                     ),
                     const SizedBox(height: 8.0),
                     LabelValueWidget(
@@ -125,8 +125,10 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                         ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).colorScheme.secondary,
-                            onPrimary: Theme.of(context).colorScheme.primary,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
                           ),
                           child: Text(
                             'View Post',

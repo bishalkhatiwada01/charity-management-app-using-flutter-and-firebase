@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -66,19 +67,17 @@ class _PostCardState extends ConsumerState<PostCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.postData.postDate.toString(),
-                        // widget.postData.postAddress,
+                        formatDateTime(
+                          widget.postData.postDate,
+                        ),
                         style: const TextStyle(),
                       ),
                       IconButton(
                           onPressed: () {
-                            Share.share(widget.postData.postHeadline! +
-                                '\n' +
-                                widget.postData.postAddress! +
-                                '\n' +
-                                widget.postData.postImageUrl!);
+                            Share.share(
+                                '${widget.postData.postHeadline}\n${widget.postData.postAddress}\n${widget.postData.postImageUrl!}');
                           },
-                          icon: Icon(Icons.share))
+                          icon: const Icon(Icons.share))
                     ],
                   ),
                 ],

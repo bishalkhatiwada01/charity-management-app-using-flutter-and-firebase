@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class ApplicationsPage extends ConsumerStatefulWidget {
   @override
@@ -15,8 +14,8 @@ class ApplicationsPage extends ConsumerStatefulWidget {
 class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
     final uid = user!.uid;
     final applicationList = ref.watch(volunteerApplicationProvider);
     return Scaffold(
@@ -36,7 +35,6 @@ class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
             itemCount: data.length,
             itemBuilder: (context, index) {
               final application = data[index];
-              print(application.volunteer.volunteerId);
               if (application.userId == uid) {
                 return Padding(
                   padding:
@@ -96,6 +94,7 @@ class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
               } else {
                 const Center(child: Text("No Application Found"));
               }
+              return null;
             },
           );
         },

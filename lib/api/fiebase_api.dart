@@ -6,6 +6,7 @@ import 'package:charity_management_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -18,7 +19,7 @@ Future<void> handleBackgroundMessage(RemoteMessage? message) async {
     if (route == "post") {
       navigatorKey.currentState?.push(
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => const HomePage(),
         ),
       );
     } else if (route == "order") {
@@ -54,8 +55,12 @@ class FirebaseApi {
 
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
-    print(message.notification?.title);
-    print(message.notification?.body);
+    if (kDebugMode) {
+      print(message.notification?.title);
+    }
+    if (kDebugMode) {
+      print(message.notification?.body);
+    }
     final String route = message.data['route'];
     if (route == "post") {
       navigatorKey.currentState?.push(
@@ -127,7 +132,9 @@ class FirebaseApi {
     );
     final token = await _firebaseMessaging.getToken();
     if (token == null) return;
-    print('Token: $token');
+    if (kDebugMode) {
+      print('Token: $token');
+    }
     _firebaseMessaging.subscribeToTopic('posts');
     initPushNotification();
     initLocalNotifications();

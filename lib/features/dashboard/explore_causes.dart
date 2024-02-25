@@ -18,8 +18,8 @@ class ExploreCauses extends StatelessWidget {
             BoxShadow(
                 color: Colors.grey.shade200.withOpacity(0.5), blurRadius: 10)
           ]),
-      margin: EdgeInsets.only(left: 15),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.all(15),
       child: Column(
         children: [
           Icon(
@@ -29,7 +29,7 @@ class ExploreCauses extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyle(fontSize: 17, color: Colors.black),
+            style: const TextStyle(fontSize: 17, color: Colors.black),
           )
         ],
       ),

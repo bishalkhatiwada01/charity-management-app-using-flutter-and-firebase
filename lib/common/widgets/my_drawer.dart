@@ -85,7 +85,8 @@ class MyDrawer extends StatelessWidget {
 
                 // navigate to profile page
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                    MaterialPageRoute(
+                    builder: (context) => const ProfilePage()));
               },
             ),
           ),

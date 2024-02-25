@@ -10,6 +10,7 @@ final userProvider =
   return userData;
 });
 
+// ignore: camel_case_types
 class getUser {
   final currentUser = FirebaseAuth.instance.currentUser!.uid;
 
