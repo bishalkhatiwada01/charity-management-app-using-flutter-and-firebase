@@ -1,3 +1,4 @@
+import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
 import 'package:charity_management_app/features/posts/data/post_data_source.dart';
 import 'package:charity_management_app/features/posts/widgets/post_card..dart';
@@ -20,15 +21,8 @@ class _PostPageState extends ConsumerState<PostPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-          elevation: 0,
-          title: const Text(
-            'POSTS',
-            style: TextStyle(letterSpacing: 6),
-          ),
+        appBar: CustomAppBar(
+          title: 'POSTS',
         ),
         drawer: const MyDrawer(),
         body: postData.when(

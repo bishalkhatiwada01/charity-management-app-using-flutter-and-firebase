@@ -1,4 +1,6 @@
 import 'package:charity_management_app/common/functions/date.dart';
+import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
+
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
 import 'package:charity_management_app/features/posts/pages/full_screen_image.dart';
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
@@ -6,6 +8,7 @@ import 'package:charity_management_app/features/posts/widgets/volunteer_button.d
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final PostData postModel;
@@ -25,18 +28,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        elevation: 0,
-        title: const Text(
-          'POSTS DETAILS',
-          style: TextStyle(
-            letterSpacing: 4,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: 'POST DETAILS',
       ),
       body: SingleChildScrollView(
         child: Card(
@@ -54,12 +47,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => FullScreenImage(imageUrl: widget.postModel.postImageUrl!),
+                      builder: (context) => FullScreenImage(
+                          imageUrl: widget.postModel.postImageUrl!),
                     ),
                   );
                 },
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(12.0)),
                   child: Image.network(
                     widget.postModel.postImageUrl!,
                     height: 200.0,
@@ -123,7 +118,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           TextSpan(
                             text: formatDateTime(
                               widget.postModel.postDate,
-                            ), 
+                            ),
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               color:
@@ -319,7 +314,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           }),
                           const SizedBox(width: 16.0),
                           DonateButton(
-                            onDonatePressed: () {},
+                            onDonatePressed: () {
+                              payWithKhaltiInApp();
+                            },
                           ),
                         ],
                       ),
@@ -332,5 +329,47 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
         ),
       ),
     );
+  }
+
+  payWithKhaltiInApp() {
+    KhaltiScope.of(context).pay(
+      config: PaymentConfig(
+          amount: 1000,
+          productIdentity: "product ID",
+          productName: "Product Name"),
+      preferences: [
+        PaymentPreference.khalti,
+      ],
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+      onCancel: onCancel,
+    );
+  }
+
+  void onSuccess(PaymentSuccessModel success) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Success"),
+            content: Text("Payment successful"),
+            actions: [
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              )
+            ],
+          );
+        });
+  }
+
+  void onFailure(PaymentFailureModel failure) {
+    debugPrint("Failure: ${failure.message}");
+  }
+
+  void onCancel() {
+    debugPrint("Cancelled");
   }
 }

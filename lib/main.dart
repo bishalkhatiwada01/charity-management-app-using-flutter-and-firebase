@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -35,12 +36,26 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return SafeArea(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Charity Management App',
-            theme: lightMode,
-            darkTheme: darkMode,
-            home: child,
+          child: KhaltiScope(
+            publicKey: 'test_public_key_49536e9f1a424b6fa5c79d0b85b765f6',
+            enabledDebugging: true,
+            builder: (context, navigatorKey) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Charity Management App',
+                theme: lightMode,
+                darkTheme: darkMode,
+                home: child,
+                supportedLocales: const [
+                  Locale('en', 'US'),
+                  Locale('ne', 'NP'),
+                ],
+                localizationsDelegates: const [
+                  KhaltiLocalizations.delegate,
+                ],
+                navigatorKey: navigatorKey,
+              );
+            },
           ),
         );
       },
