@@ -3,8 +3,8 @@ import 'package:charity_management_app/common/themes/dark_theme.dart';
 import 'package:charity_management_app/common/themes/light_theme.dart';
 import 'package:charity_management_app/common/widgets/my_bottom_navbar.dart';
 import 'package:charity_management_app/features/dashboard/home_page.dart';
-import 'package:charity_management_app/features/dashboard/splash_screen.dart';
-import 'package:charity_management_app/features/news/pages/news_page.dart';
+import 'package:charity_management_app/features/news/view/news_page.dart';
+import 'package:charity_management_app/features/newsAPi/view/news_page.dart';
 import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';
 import 'package:charity_management_app/features/posts/pages/post_page.dart';
 import 'package:charity_management_app/firebase_options.dart';
@@ -59,12 +59,12 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: const SplashScreen(),
+      // child: const SplashScreen(),
+      child: const MainPage(),
     );
   }
 }
 
-// mainpage
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
   final _pages = [
     const HomePage(),
     const PostPage(),
-    const NewsPage(),
+    NewsPage(),
     const NotificationPage()
   ];
 

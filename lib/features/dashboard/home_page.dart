@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
+import 'package:charity_management_app/features/dashboard/widgets/home_post_card.dart';
+import 'package:charity_management_app/features/posts/data/post_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,9 +29,27 @@ class _HomePageState extends ConsumerState<HomePage> {
   ];
   int _currentIndex = 0;
 
+  bool isLoading = true;
+
+  // List<NewsModel> news = [];
+
+  // void getNews() async {
+  //   final response = await FetchNews.fetchNewNews();
+  //   setState(() async {
+  //     news = response;
+  //     isLoading = false;
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getNews();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    // final postData = ref.watch(postProvider);
+    final postData = ref.watch(postProvider);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'HOME',
@@ -102,254 +123,57 @@ class _HomePageState extends ConsumerState<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Urgent Fundraising',
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        const Text('Posts for Donation and Volunteer',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600)),
-                        Text(
-                          'See all',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'See all',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
                     SizedBox(
-                      height: 230,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            width: 200,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.black,
-                                    style: BorderStyle.solid,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(15.0),
-                                      topRight: Radius.circular(15.0),
-                                    ),
-                                    child: Image.asset('assets/Image1.png')),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      const Text(
-                                        'Assist with Surgical',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const LinearProgressIndicator(
-                                        color: Colors.black,
-                                        backgroundColor: Colors.grey,
-                                        value: 0.8,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          RichText(
-                                            text: const TextSpan(
-                                              // Note: Styles for TextSpans must be explicitly defined.
-                                              // Child text spans will inherit styles from parent
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: "1,859",
-                                                  style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: 'Donors',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          RichText(
-                                            text: const TextSpan(
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: "3",
-                                                  style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: ' Days left',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            width: 200,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.black,
-                                    style: BorderStyle.solid,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(15.0),
-                                      topRight: Radius.circular(15.0),
-                                    ),
-                                    child:
-                                        Image.asset('assets/food_need.jpeg')),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      const Text(
-                                        'Assist with Food',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const LinearProgressIndicator(
-                                        color: Colors.black,
-                                        backgroundColor: Colors.grey,
-                                        value: 0.8,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          RichText(
-                                            text: const TextSpan(
-                                              // Note: Styles for TextSpans must be explicitly defined.
-                                              // Child text spans will inherit styles from parent
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: "1,859",
-                                                  style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: ' Donators',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          RichText(
-                                            text: const TextSpan(
-                                              // Note: Styles for TextSpans must be explicitly defined.
-                                              // Child text spans will inherit styles from parent
-                                              style: TextStyle(
-                                                fontSize: 12.0,
-                                              ),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: "5",
-                                                  style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: ' Days left',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                      height: 190.h,
+                      width: double.infinity,
+                      child: postData.when(
+                        data: (data) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                width: 170.w,
+                                child: SmallPostCard(
+                                  postData: data[index],
+                                ),
+                              );
+                            },
+                            itemCount: data.length,
+                          );
+                        },
+                        error: (error, stack) => const Center(
+                          child: Text('Error'),
+                        ),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -368,9 +192,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                
                     SizedBox(
                       height: 180,
                       child: ListView(
