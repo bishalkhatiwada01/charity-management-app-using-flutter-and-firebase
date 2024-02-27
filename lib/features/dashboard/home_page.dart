@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
 import 'package:charity_management_app/common/widgets/my_drawer.dart';
+import 'package:charity_management_app/features/dashboard/widgets/home_news_card.dart';
 import 'package:charity_management_app/features/dashboard/widgets/home_post_card.dart';
 import 'package:charity_management_app/features/news/controller/fetch_news.dart';
 import 'package:charity_management_app/features/news/model/news_model.dart';
+import 'package:charity_management_app/features/news/view/news_page.dart';
 import 'package:charity_management_app/features/news/view/widgets/news_card.dart';
 import 'package:charity_management_app/features/posts/data/post_data_source.dart';
+import 'package:charity_management_app/features/posts/pages/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -110,38 +113,26 @@ class _HomePageState extends ConsumerState<HomePage> {
                     )
                     .toList(),
               ),
+              SizedBox(height: 15.h),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Text('Posts for Donation and Volunteer',
+                        Text('     Posts for Donation and Volunteer',
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .colorScheme
                                     .inversePrimary,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w600)),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        )
                       ],
                     ),
                     SizedBox(
-                      height: 200.h,
+                      height: 220.h,
                       width: double.infinity,
                       child: postData.when(
                         data: (data) {
@@ -149,7 +140,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return SizedBox(
-                                width: 180.w,
+                                width: 190.w,
                                 child: SmallPostCard(
                                   postData: data[index],
                                 ),
@@ -166,11 +157,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
+                    SizedBox(height: 10.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           '     News',
@@ -180,20 +169,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'See all',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        )
                       ],
                     ),
                     Container(
-                      height: 210.h,
+                      height: 220.h,
                       width: double.infinity,
                       color: Theme.of(context).colorScheme.background,
                       child: newsData.when(
@@ -202,8 +181,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return SizedBox(
-                                width: 180.w,
-                                child: NewsCard(
+                                width: 190.w,
+                                child: SmallNewsCard(
                                   news: data[index],
                                 ),
                               );

@@ -131,6 +131,7 @@ class NewsDetailsPage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 16,
                       fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
                     ),
                   )
                 ],
@@ -140,17 +141,9 @@ class NewsDetailsPage extends StatelessWidget {
             RichText(
               text: TextSpan(
                 children: [
+
                   TextSpan(
-                    text: 'Description: ',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 18,
-                    ),
-                  ),
-                  TextSpan(
-                    text: news.description,
+                    text: news.content,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 16,

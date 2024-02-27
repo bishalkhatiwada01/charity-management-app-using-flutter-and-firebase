@@ -21,15 +21,13 @@ class NewsCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (_) => NewsDetailsPage(
-              news,
-            ),
+            builder: (_) => NewsDetailsPage(news),
           ),
         );
       },
       child: Card(
         elevation: 4.0,
-        margin: const EdgeInsets.all(10.0),
+        margin:  EdgeInsets.all(18.sp),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -42,7 +40,7 @@ class NewsCard extends StatelessWidget {
                     const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   news.urlToImage!,
-                  height: 80.0,
+                  height: 280.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -53,8 +51,8 @@ class NewsCard extends StatelessWidget {
                   news.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12.0,
+                  style:  TextStyle(
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -64,8 +62,8 @@ class NewsCard extends StatelessWidget {
                 child: Text(
                   "By: ${news.author ?? "Unknown"}",
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12.0,
+                  style:  TextStyle(
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

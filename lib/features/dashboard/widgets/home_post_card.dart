@@ -37,38 +37,37 @@ class _SmallPostCardState extends ConsumerState<SmallPostCard> {
         ),
         child: SizedBox(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   widget.postData.postImageUrl!,
-                  height: 75.0,
+                  height: 110.sp,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(6.0),
+                padding: EdgeInsets.all(5.sp),
                 child: Text(
                   widget.postData.postHeadline,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12.0,
+                  style: TextStyle(
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              SizedBox(height: 5.h),
               Container(
-                padding: const EdgeInsets.all(6.0),
+                padding: EdgeInsets.all(5.sp),
                 child: Text(
-                   widget.postData.postAddress,
+                  widget.postData.postAddress,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 12.0,
+                  style: TextStyle(
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
