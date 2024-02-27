@@ -2,9 +2,11 @@ import 'package:charity_management_app/features/posts/data/post_data_model.dart'
 import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SmallPostCard extends ConsumerStatefulWidget {
   final PostData postData;
+
   const SmallPostCard({
     required this.postData,
     super.key,
@@ -35,23 +37,35 @@ class _SmallPostCardState extends ConsumerState<SmallPostCard> {
         ),
         child: SizedBox(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   widget.postData.postImageUrl!,
-                  height: 80.0,
+                  height: 75.0,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Text(
                   widget.postData.postHeadline,
                   maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.h),
+              Container(
+                padding: const EdgeInsets.all(6.0),
+                child: Text(
+                   widget.postData.postAddress,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontSize: 12.0,

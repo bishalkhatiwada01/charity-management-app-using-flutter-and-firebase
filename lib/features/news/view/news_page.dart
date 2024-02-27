@@ -1,47 +1,53 @@
-// import 'package:charity_management_app/features/news/controller/fetch_news.dart';
-// import 'package:charity_management_app/features/news/model/news_model.dart';
-// import 'package:charity_management_app/features/news/view/widgets/news_card.dart';
-// import 'package:flutter/material.dart';
+import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
+import 'package:charity_management_app/features/news/controller/fetch_news.dart';
+import 'package:charity_management_app/features/news/model/news_model.dart';
+import 'package:charity_management_app/features/news/view/widgets/news_card.dart';
+import 'package:flutter/material.dart';
 
-// class NewsPage extends StatefulWidget {
-//   const NewsPage({super.key});
+class NewsPage extends StatefulWidget {
+  const NewsPage({super.key});
 
-//   @override
-//   State<NewsPage> createState() => _NewsPageState();
-// }
+  @override
+  State<NewsPage> createState() => _NewsPageState();
+}
 
-// class _NewsPageState extends State<NewsPage> {
-//   bool isLoading = true;
+class _NewsPageState extends State<NewsPage> {
 
-//   List<NewsModel> news = [];
+  bool isLoading = true;
 
-//   void getNews() async {
-//     final response = await FetchNews.fetchNewNews();
-//     setState(() async {
-//       news = response;
-//       isLoading = false;
-//     });
-//   }
+  List<NewsModel> news = [];
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     getNews();
-//   }
+  void getNews() async {
+    final response = await FetchNews.fetchNewNews();
+    setState(() async {
+      news = response;
+      isLoading = false;
+    });
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: news.isEmpty
-//           ? Center(
-//               child: Text('No news found!'),
-//             )
-//           : ListView.builder(
-//               itemBuilder: (context, index) {
-//                 return NewsCard(news: news[index]);
-//               },
-//               itemCount: news.length,
-//             ),
-//     );
-//   }
-// }
+  @override
+  void initState() {
+    super.initState();
+    getNews();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: 'NEWS',
+      ),
+      drawer: Drawer(),
+      body: news.isEmpty
+          ? Center(
+              child: Text('No news found!'),
+            )
+          : ListView.builder(
+              itemBuilder: (context, index) {
+                return NewsCard(news: news[index]);
+              },
+              itemCount: news.length,
+            ),
+    );
+  }
+}
