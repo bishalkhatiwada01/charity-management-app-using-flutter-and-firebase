@@ -82,10 +82,13 @@ class _ApplicationsPageState extends ConsumerState<ApplicationsPage> {
                           ],
                         ),
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
                               builder: (context) => ApplicationDetailPage(
-                                    application: application,
-                                  )));
+                                application: application,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),

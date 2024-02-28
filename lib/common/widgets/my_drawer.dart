@@ -1,4 +1,3 @@
-// ignore_for_file: unused_import
 
 import 'package:charity_management_app/features/auth/pages/login_page.dart';
 import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';

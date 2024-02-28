@@ -1,3 +1,5 @@
+import 'package:charity_management_app/features/posts/data/post_data_model.dart';
+import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:charity_management_app/features/volunteers/data/volunteer_data_model.dart';
 import 'package:charity_management_app/features/volunteers/widgets/label_value_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ApplicationDetailPage extends ConsumerStatefulWidget {
   final VolunteerApplication application;
 
-  const ApplicationDetailPage({super.key, required this.application});
+  const ApplicationDetailPage({
+    super.key,
+    required this.application,
+  });
 
   @override
   ConsumerState<ApplicationDetailPage> createState() =>
@@ -123,7 +128,15 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => PostDetailsPage(
+                            //       postModel: widget.post,
+                            //     ),
+                            //   ),
+                            // );
+                          },
                           style: ElevatedButton.styleFrom(
                             foregroundColor:
                                 Theme.of(context).colorScheme.primary,

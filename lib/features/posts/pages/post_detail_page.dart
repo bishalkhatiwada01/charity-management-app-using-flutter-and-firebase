@@ -6,11 +6,14 @@ import 'package:charity_management_app/features/posts/pages/full_screen_image.da
 import 'package:charity_management_app/features/posts/widgets/donate_button.dart';
 import 'package:charity_management_app/features/posts/widgets/volunteer_button.dart';
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 
-class PostDetailsPage extends StatefulWidget {
+class PostDetailsPage extends ConsumerStatefulWidget {
   final PostData postModel;
 
   const PostDetailsPage({
@@ -19,14 +22,13 @@ class PostDetailsPage extends StatefulWidget {
   });
 
   @override
-  State<PostDetailsPage> createState() => _PostDetailsPageState();
+  ConsumerState<PostDetailsPage> createState() => _PostDetailsPageState();
 }
 
-class _PostDetailsPageState extends State<PostDetailsPage> {
-  // for delete data
-
+class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    print(widget.postModel);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'POST DETAILS',
@@ -48,7 +50,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => FullScreenImage(
-                          imageUrl: widget.postModel.postImageUrl!),
+                        imageUrl: widget.postModel.postImageUrl!,
+                      ),
                     ),
                   );
                 },
@@ -315,7 +318,67 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           const SizedBox(width: 16.0),
                           DonateButton(
                             onDonatePressed: () {
-                              payWithKhaltiInApp();
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  final TextEditingController
+                                      _amountController =
+                                      TextEditingController();
+                                  return AlertDialog(
+                                    title: Text(
+                                      'Enter amount to pay',
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .inversePrimary,
+                                      ),
+                                    ),
+                                    content: TextField(
+                                      controller: _amountController,
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Enter amount',
+                                        labelStyle: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                        ),
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text(
+                                          'Pay',
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          int amount =
+                                              int.parse(_amountController.text);
+                                          payWithKhaltiInApp(amount);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                           ),
                         ],
@@ -331,12 +394,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     );
   }
 
-  payWithKhaltiInApp() {
+  final currentUser = FirebaseAuth.instance.currentUser!.uid;
+
+  void payWithKhaltiInApp(int amount) {
     KhaltiScope.of(context).pay(
       config: PaymentConfig(
-          amount: 1000,
-          productIdentity: "product ID",
-          productName: "Product Name"),
+          amount: amount * 100,
+          productIdentity: "User ID ${currentUser}",
+          productName: "User Name ${widget.postModel.postHeadline}"),
       preferences: [
         PaymentPreference.khalti,
       ],
@@ -347,6 +412,20 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   }
 
   void onSuccess(PaymentSuccessModel success) {
+    final firestoreInstance = FirebaseFirestore.instance;
+
+    firestoreInstance.collection('donations').add({
+      'userId': currentUser,
+      'postTitle': widget.postModel.postHeadline,
+      'amount': success.amount / 100,
+      'transactionId': success.idx,
+      'paymentDate': DateTime.now(),
+    }).then((value) {
+      print("Payment Added");
+    }).catchError((error) {
+      print("Failed to add payment: $error");
+    });
+
     showDialog(
         context: context,
         builder: (context) {
@@ -356,6 +435,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
             actions: [
               SimpleDialogOption(
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.pop(context);
                 },
                 child: Text("OK"),

@@ -1,19 +1,25 @@
-import 'package:charity_management_app/features/profile/pages/donation_history_page.dart';
+import 'package:charity_management_app/features/donate/donation_history_page.dart';
 import 'package:charity_management_app/features/profile/pages/profile_details_page.dart';
 import 'package:charity_management_app/features/profile/service/get_user_service.dart';
-import 'package:charity_management_app/features/profile/widgets/list_tile.dart';
-import 'package:charity_management_app/features/volunteers/pages/volunteer_history_page.dart';
+import 'package:charity_management_app/features/profile/widgets/my_card_profile.dart';
+import 'package:charity_management_app/features/volunteers/pages/application_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ConsumerState<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
     final userDataAsyncValue = ref.watch(userProvider);
+    print(userDataAsyncValue);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -36,15 +42,18 @@ class ProfilePage extends ConsumerWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      maxRadius: 65,
-                      backgroundImage: AssetImage("assets/6195145.jpg"),
+                    GestureDetector(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        maxRadius: 65,
+                        backgroundImage: AssetImage("assets/6195145.jpg"),
+                      ),
                     ),
                   ],
                 ),
@@ -128,7 +137,7 @@ class ProfilePage extends ConsumerWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const DonationHistoryPage(),
+                              builder: (context) => DonationHistoryPage(),
                             ),
                           );
                         },
@@ -145,8 +154,7 @@ class ProfilePage extends ConsumerWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VolunteerHistoryPage()));
+                                  builder: (context) => ApplicationsPage()));
                         },
                         title: 'Volunteer History',
                         leading: const Icon(

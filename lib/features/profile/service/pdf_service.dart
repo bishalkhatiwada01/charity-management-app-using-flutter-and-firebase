@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 
 class PDFService {
   static Future<void> downloadDonationHistoryPDF(
-      String campaignName, String donationDate, String amount) async {
+      String campaignName, String donationDate, String amount, String transactionId) async {
     final pdf = pw.Document();
 
     pdf.addPage(
@@ -19,6 +19,7 @@ class PDFService {
                 pw.Text('Campaign Name: $campaignName'),
                 pw.Text('Date: $donationDate'),
                 pw.Text('Amount: $amount'),
+                pw.Text('Transaction ID: $transactionId'),
               ],
             ),
           );

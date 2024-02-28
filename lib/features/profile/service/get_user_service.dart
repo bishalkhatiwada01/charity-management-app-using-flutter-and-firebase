@@ -10,15 +10,20 @@ final userProvider =
   return userData;
 });
 
-// ignore: camel_case_types
 class getUser {
-  final currentUser = FirebaseAuth.instance.currentUser!.uid;
+  final currentUser = FirebaseAuth.instance.currentUser;
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-    final data = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser)
-        .get();
-    return data;
+    print("currentUser: ${currentUser}");
+    if (currentUser != null) {
+      final data = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser?.uid)
+          .get();
+      return data;
+    } else {
+      // Handle the case when currentUser is null
+      throw Exception('No current user');
+    }
   }
 }
