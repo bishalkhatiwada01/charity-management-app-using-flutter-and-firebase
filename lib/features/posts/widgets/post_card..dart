@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 
 class PostCard extends ConsumerStatefulWidget {
   final PostData postData;
+
   const PostCard({
     required this.postData,
     super.key,
@@ -73,11 +74,12 @@ class _PostCardState extends ConsumerState<PostCard> {
                         style: const TextStyle(),
                       ),
                       IconButton(
-                          onPressed: () {
-                            Share.share(
-                                '${widget.postData.postHeadline}\n${widget.postData.postAddress}\n${widget.postData.postImageUrl!}');
-                          },
-                          icon: const Icon(Icons.share))
+                        onPressed: () {
+                          Share.share(
+                              '${widget.postData.postHeadline}\n${widget.postData.postAddress}\n${widget.postData.postImageUrl!}');
+                        },
+                        icon: const Icon(Icons.share),
+                      ),
                     ],
                   ),
                 ],

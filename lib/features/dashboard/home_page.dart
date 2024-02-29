@@ -120,15 +120,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('     Posts for Donation and Volunteer',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600)),
+                        Text(
+                          '     Posts for Donation and Volunteer',
+                          style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ],
                     ),
                     SizedBox(

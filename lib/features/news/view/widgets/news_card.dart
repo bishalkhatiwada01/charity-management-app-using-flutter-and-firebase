@@ -4,6 +4,7 @@ import 'package:charity_management_app/features/news/view/news_detail_page.dart'
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsModel news;
@@ -27,7 +28,7 @@ class NewsCard extends StatelessWidget {
       },
       child: Card(
         elevation: 4.0,
-        margin:  EdgeInsets.all(18.sp),
+        margin: EdgeInsets.all(18.sp),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -51,22 +52,35 @@ class NewsCard extends StatelessWidget {
                   news.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "By: ${news.author ?? "Unknown"}",
-                  overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 340.w,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "By: ${news.author ?? "Unknown"}",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    onPressed: () {
+                      Share.share(
+                          '${news.title}\n${news.publishedAt}\n${news.urlToImage}');
+                    },
+                    icon: const Icon(Icons.share),
+                  ),
+                ],
               ),
             ],
           ),

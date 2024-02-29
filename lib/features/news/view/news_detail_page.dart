@@ -3,6 +3,7 @@ import 'package:charity_management_app/features/news/model/news_model.dart';
 import 'package:charity_management_app/features/posts/pages/full_screen_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsPage extends StatelessWidget {
   final NewsModel news;
@@ -47,8 +48,7 @@ class NewsDetailsPage extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius:
-                     BorderRadius.vertical(top: Radius.circular(12.0)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   news.urlToImage ?? '',
                   height: 350.h,
@@ -111,7 +111,6 @@ class NewsDetailsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8.0),
-
             const SizedBox(height: 16.0),
             RichText(
               text: TextSpan(
@@ -141,7 +140,6 @@ class NewsDetailsPage extends StatelessWidget {
             RichText(
               text: TextSpan(
                 children: [
-
                   TextSpan(
                     text: news.content,
                     style: TextStyle(
@@ -153,9 +151,26 @@ class NewsDetailsPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).colorScheme.secondary,
+                onPrimary: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              onPressed: () => _launchUrl(Uri.parse(news.url)),
+              child: Text('Read More'),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (await canLaunch(url.toString())) {
+      await _launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

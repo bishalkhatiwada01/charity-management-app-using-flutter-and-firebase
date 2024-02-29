@@ -53,7 +53,10 @@ class DonationHistoryCard extends StatelessWidget {
           contentPadding: const EdgeInsets.all(16),
           title: Text(
             campaignName,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +68,8 @@ class DonationHistoryCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                    fontStyle: FontStyle.italic,
                   ),
                   children: [
                     TextSpan(
@@ -84,6 +89,10 @@ class DonationHistoryCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+
+                    color: Theme.of(context).colorScheme.inversePrimary,
+
                   ),
                   children: [
                     TextSpan(
@@ -101,15 +110,21 @@ class DonationHistoryCard extends StatelessWidget {
                 text: TextSpan(
                   text: 'Transaction Id: ',
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+
+                    color: Theme.of(context).colorScheme.inversePrimary,
+
                   ),
                   children: [
                     TextSpan(
                       text: transactionId,
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: 14.sp,
+                        fontStyle: FontStyle.italic,
+
+                        fontSize: 13.sp,
                       ),
                     ),
                   ],

@@ -12,23 +12,12 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-
-  bool isLoading = true;
-
-  List<NewsModel> news = [];
-
-  void getNews() async {
-    final response = await FetchNews.fetchNewNews();
-    setState(() async {
-      news = response;
-      isLoading = false;
-    });
-  }
+  Future<List<NewsModel>>? newsFuture;
 
   @override
   void initState() {
     super.initState();
-    getNews();
+    newsFuture = FetchNews.fetchNewNews();
   }
 
   @override
@@ -38,16 +27,23 @@ class _NewsPageState extends State<NewsPage> {
         title: 'NEWS',
       ),
       drawer: Drawer(),
-      body: news.isEmpty
-          ? Center(
-              child: Text('No news found!'),
-            )
-          : ListView.builder(
+      body: FutureBuilder<List<NewsModel>>(
+        future: newsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView.builder(
               itemBuilder: (context, index) {
-                return NewsCard(news: news[index]);
+                return NewsCard(news: snapshot.data![index]);
               },
-              itemCount: news.length,
-            ),
+              itemCount: snapshot.data!.length,
+            );
+          }
+        },
+      ),
     );
   }
 }

@@ -46,24 +46,24 @@ class SmallNewsCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding:  EdgeInsets.all(5.sp),
+                padding: EdgeInsets.all(5.sp),
                 child: Text(
                   news.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Container(
-                padding:  EdgeInsets.all(5.sp),
+                padding: EdgeInsets.all(5.sp),
                 child: Text(
                   "By: ${news.author ?? "Unknown"}",
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

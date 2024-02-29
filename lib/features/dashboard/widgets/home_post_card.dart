@@ -44,7 +44,7 @@ class _SmallPostCardState extends ConsumerState<SmallPostCard> {
                     const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   widget.postData.postImageUrl!,
-                  height: 110.sp,
+                  height: 108.sp,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -56,7 +56,7 @@ class _SmallPostCardState extends ConsumerState<SmallPostCard> {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -67,7 +67,7 @@ class _SmallPostCardState extends ConsumerState<SmallPostCard> {
                   widget.postData.postAddress,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 13.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
