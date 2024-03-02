@@ -34,6 +34,7 @@ final class VolunteerDataService {
       'userId': userId,
       'postId': postId,
       'volunteerExperience': experience,
+      'acceptedApplicationId': '',
     });
   }
 

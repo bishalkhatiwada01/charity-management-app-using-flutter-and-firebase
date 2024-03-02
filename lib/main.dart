@@ -76,8 +76,8 @@ class _MainPageState extends State<MainPage> {
   final _pages = [
     const HomePage(),
     const PostPage(),
-    NewsPage(),
-    const NotificationPage()
+    const NewsPage(),
+    NotificationPage()
   ];
 
   int _selectedIndex = 0;

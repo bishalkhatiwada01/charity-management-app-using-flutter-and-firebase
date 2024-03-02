@@ -162,18 +162,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           color: Colors.black54,
                         ),
                       ),
-                      // SizedBox(height: 6.h),
-                      //
-                      // MyCardProfile(
-                      //   onPressed: () {
-                      //     Navigator.pushNamed(context, '/help-support');
-                      //   },
-                      //   title: 'Help & Support',
-                      //   leading: const Icon(
-                      //     Icons.help_outline,
-                      //     color: Colors.black54,
-                      //   ),
-                      // ),
+
                       SizedBox(height: 6.h),
 
                       MyCardProfile(

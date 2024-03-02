@@ -13,6 +13,7 @@ class VolunteerApplicationPage extends StatefulWidget {
     super.key,
     required this.postId,
   });
+
   @override
   // ignore: library_private_types_in_public_api
   _VolunteerApplicationPageState createState() =>
@@ -65,13 +66,15 @@ class _VolunteerApplicationPageState extends State<VolunteerApplicationPage> {
 
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Application submitted successfully')),
-          
+          const SnackBar(
+            content: Text('Application submitted successfully'),
+          ),
         );
       } catch (e) {
-        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to submit application: $e')),
+          SnackBar(
+            content: Text('Failed to submit application: $e'),
+          ),
         );
       }
     }

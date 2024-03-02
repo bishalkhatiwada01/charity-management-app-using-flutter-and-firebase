@@ -22,14 +22,9 @@ Future<void> handleBackgroundMessage(RemoteMessage? message) async {
           builder: (context) => const HomePage(),
         ),
       );
-    } else if (route == "order") {
-      navigatorKey.currentState?.pushNamed('/order-list');
     } else {
       navigatorKey.currentState?.pushNamed('/notification');
     }
-  } else {
-    navigatorKey.currentState
-        ?.pushNamedAndRemoveUntil('/login', (route) => false);
   }
 }
 
