@@ -1,5 +1,5 @@
+import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/posts/data/post_data_model.dart';
-import 'package:charity_management_app/features/posts/pages/post_detail_page.dart';
 import 'package:charity_management_app/features/volunteers/data/volunteer_data_model.dart';
 import 'package:charity_management_app/features/volunteers/widgets/label_value_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ApplicationDetailPage extends ConsumerStatefulWidget {
   final VolunteerApplication application;
+  final PostData? postModel;
 
   const ApplicationDetailPage({
     super.key,
     required this.application,
+    this.postModel,
   });
 
   @override
@@ -83,7 +85,7 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                         value: applicationData.volunteerCreatedAt),
                     SizedBox(height: 8.h),
                     LabelValueWidget(
-                      label: 'email',
+                      label: 'Email',
                       value: applicationData.volunteerEmail,
                     ),
                     const SizedBox(height: 8.0),
@@ -111,6 +113,7 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                       label: 'Skills',
                       value: applicationData.volunteerSkills!.join(', '),
                     ),
+                    const SizedBox(height: 8.0),
                     LabelValueWidget(
                       label: 'Interest',
                       value: applicationData.volunteerInterests!.join(', '),
@@ -127,32 +130,34 @@ class _ApplicationDetailPageState extends ConsumerState<ApplicationDetailPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => PostDetailsPage(
-                            //       postModel: widget.post,
-                            //     ),
-                            //   ),
-                            // );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                          ),
-                          child: Text(
-                            'View Post',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary),
-                          ),
-                        ),
                       ],
                     ),
+                    LabelValueWidget(
+                      label: 'Title',
+                      value: applicationData.post.postHeadline,
+                    ),
+                    const SizedBox(height: 8.0),
+                    LabelValueWidget(
+                      label: 'Address',
+                      value: applicationData.post.postAddress,
+                    ),
+                    const SizedBox(height: 8.0),
+                    LabelValueWidget(
+                      label: 'Date',
+                      value: applicationData.post.postDate,
+                    ),
+                    const SizedBox(height: 8.0),
+                    LabelValueWidget(
+                      label: 'Description',
+                      value: applicationData.post.postContent,
+                    ),
+                    const SizedBox(height: 8.0),
+                    LabelValueWidget(
+                      label: 'Time',
+                      value: formatDateTime(applicationData.post.postDate),
+                    ),
+                    const SizedBox(height: 8.0),
+
                   ],
                 ),
               ),

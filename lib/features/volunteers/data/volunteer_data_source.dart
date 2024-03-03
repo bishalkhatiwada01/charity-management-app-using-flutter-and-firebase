@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'volunteer_data_model.dart';
 
@@ -22,6 +23,7 @@ final class VolunteerDataService {
     required String postId,
     required String? experience,
   }) async {
+    final token = await FirebaseMessaging.instance.getToken();
     await _db.collection('volunteer_applications').add({
       'volunteerFullName': fullName,
       'volunteerEmail': email,
@@ -34,7 +36,8 @@ final class VolunteerDataService {
       'userId': userId,
       'postId': postId,
       'volunteerExperience': experience,
-      'acceptedApplicationId': '',
+      'acceptedApplicationId': "",
+      'userToken': token,
     });
   }
 

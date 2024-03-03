@@ -6,6 +6,7 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
   return NotificationService();
 });
 
-final notificationStreamProvider = StreamProvider<List<NotificationModel>>((ref) {
-  return ref.watch(notificationServiceProvider).getNotifications();
+final notificationStreamProvider =
+    StreamProvider<List<NotificationModel>>((ref) {
+  return ref.watch(notificationServiceProvider).getNotification();
 });

@@ -1,6 +1,6 @@
 import 'package:charity_management_app/common/functions/date.dart';
 import 'package:charity_management_app/features/news/model/news_model.dart';
-import 'package:charity_management_app/features/news/view/news_detail_page.dart';
+import 'package:charity_management_app/features/news/presentation/news_detail_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

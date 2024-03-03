@@ -90,9 +90,7 @@ class DonationHistoryCard extends StatelessWidget {
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
-
                     color: Theme.of(context).colorScheme.inversePrimary,
-
                   ),
                   children: [
                     TextSpan(
@@ -113,9 +111,7 @@ class DonationHistoryCard extends StatelessWidget {
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
-
                     color: Theme.of(context).colorScheme.inversePrimary,
-
                   ),
                   children: [
                     TextSpan(
@@ -123,7 +119,6 @@ class DonationHistoryCard extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.italic,
-
                         fontSize: 13.sp,
                       ),
                     ),
@@ -135,12 +130,12 @@ class DonationHistoryCard extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.download),
             onPressed: () =>
-                // _downloadPDF(context), // Pass the context to show SnackBar
-                ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('PDF Downloaded'),
-              ),
-            ),
+                _downloadPDF(context), // Pass the context to show SnackBar
+            //     ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(
+            //     content: Text('PDF Downloaded'),
+            //   ),
+            // ),
           ),
         ),
       ),

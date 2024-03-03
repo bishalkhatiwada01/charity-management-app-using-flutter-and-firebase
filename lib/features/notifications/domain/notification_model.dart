@@ -1,24 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class NotificationModel {
-  final String id;
-  final String postHeadline;
-  final String time;
-  final String address;
+  final String title;
+  final String body;
+  final String applicationId;
+  final String receiverId;
+  final String createdAt;
 
   NotificationModel({
-    required this.id,
-    required this.postHeadline,
-    required this.time,
-    required this.address,
+    required this.title,
+    required this.body,
+    required this.applicationId,
+    required this.receiverId,
+    required this.createdAt,
   });
 
-  factory NotificationModel.fromDocument(DocumentSnapshot doc) {
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
     return NotificationModel(
-      id: doc.id,
-      postHeadline: doc['postHeadline'],
-      time: doc['time'],
-      address: doc['address'],
+      title: json['title'],
+      body: json['body'],
+      applicationId: json['applicationId'],
+      receiverId: json['receiverId'],
+      createdAt: json['createdAt'],
     );
   }
 }

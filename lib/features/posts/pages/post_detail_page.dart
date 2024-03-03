@@ -420,6 +420,7 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
       'amount': success.amount / 100,
       'transactionId': success.idx,
       'paymentDate': DateTime.now(),
+      'postId': widget.postModel.postId,
     }).then((value) {
       print("Payment Added");
     }).catchError((error) {

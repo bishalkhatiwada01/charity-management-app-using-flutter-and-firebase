@@ -2,6 +2,7 @@ import 'package:charity_management_app/common/widgets/my_custom_button.dart';
 import 'package:charity_management_app/features/auth/pages/forgot_password_page.dart';
 import 'package:charity_management_app/features/auth/pages/sign_up_page.dart';
 import 'package:charity_management_app/features/auth/services/auth_service.dart';
+import 'package:charity_management_app/features/auth/services/status_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,10 +26,8 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (response != null) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        '/home',
-        (route) => false,
-      );
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => StatusPage()));
     }
   }
 

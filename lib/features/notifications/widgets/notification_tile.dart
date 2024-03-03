@@ -12,9 +12,10 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(notification.postHeadline),
+      isThreeLine: true,
+      title: Text(notification.title),
       subtitle: Text(
-          'Time: ${timeAgo(DateTime.parse(notification.time))}\nAddress: ${notification.address}'),
+          'Time: ${timeAgo(DateTime.parse(notification.createdAt))}'),
       onTap: () {
         // Navigator.push(
         //   context,

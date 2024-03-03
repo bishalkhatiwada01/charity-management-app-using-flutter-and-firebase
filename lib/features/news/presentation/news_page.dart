@@ -1,7 +1,7 @@
 import 'package:charity_management_app/common/widgets/custom_app_bar.dart';
 import 'package:charity_management_app/features/news/controller/fetch_news.dart';
 import 'package:charity_management_app/features/news/model/news_model.dart';
-import 'package:charity_management_app/features/news/view/widgets/news_card.dart';
+import 'package:charity_management_app/features/news/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatefulWidget {

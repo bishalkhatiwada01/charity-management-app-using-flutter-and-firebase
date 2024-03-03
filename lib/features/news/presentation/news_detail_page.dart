@@ -153,12 +153,8 @@ class NewsDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).colorScheme.secondary,
-                onPrimary: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              onPressed: () => _launchUrl(Uri.parse(news.url)),
-              child: Text('Read More'),
+              onPressed: () => _launchURL(news.url),
+              child: Text('Open News'),
             ),
           ],
         ),
@@ -166,9 +162,9 @@ class NewsDetailsPage extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(Uri url) async {
-    if (await canLaunch(url.toString())) {
-      await _launchUrl(url);
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
     } else {
       throw 'Could not launch $url';
     }

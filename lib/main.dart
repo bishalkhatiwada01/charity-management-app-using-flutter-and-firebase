@@ -4,7 +4,7 @@ import 'package:charity_management_app/common/themes/light_theme.dart';
 import 'package:charity_management_app/common/widgets/my_bottom_navbar.dart';
 import 'package:charity_management_app/features/dashboard/home_page.dart';
 import 'package:charity_management_app/features/dashboard/splash_screen.dart';
-import 'package:charity_management_app/features/news/view/news_page.dart';
+import 'package:charity_management_app/features/news/presentation/news_page.dart';
 import 'package:charity_management_app/features/notifications/presentation/notification_page.dart';
 import 'package:charity_management_app/features/posts/pages/post_page.dart';
 import 'package:charity_management_app/firebase_options.dart';
