@@ -7,11 +7,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class NotificationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
-    final asyncValue = ref.watch(notificationStreamProvider);
+    final notificationData = ref.watch(notificationProvider);
 
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Notifications',
+      ),
+      body: notificationData.when(
+        data: (data) {
+          return data.isEmpty
+              ? const Center(
+                  child: Text('No notifications'),
+                )
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    ref.refresh(notificationProvider);
+                  },
+                  child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      final notification = data[index];
+                      return NotificationTile(
+                        notification: notification,
+                      );
+                    },
+                  ),
+                );
+        },
+        error: (e, s) => Center(
+          child: Text(e.toString()),
+        ),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ String formatDateTime(String dateString) {
   DateTime dateTime = DateTime.parse(dateString);
   return DateFormat.yMMMEd().add_jm().format(dateTime);
 }
+
 String formatDistanceToNowStrict(String dateString) {
   DateTime now = DateTime.now();
   DateTime date = DateTime.parse(dateString);
@@ -30,5 +31,18 @@ String formatDistanceToNowStrict(String dateString) {
   } else {
     int years = difference.inDays ~/ 365;
     return '$years years';
+  }
+}
+
+String timeAgo(DateTime date) {
+  Duration diff = DateTime.now().difference(date);
+  if (diff.inDays > 0) {
+    return '${diff.inDays} day(s) ago';
+  } else if (diff.inHours > 0) {
+    return '${diff.inHours} hour(s) ago';
+  } else if (diff.inMinutes > 0) {
+    return '${diff.inMinutes} minute(s) ago';
+  } else {
+    return 'Just now';
   }
 }

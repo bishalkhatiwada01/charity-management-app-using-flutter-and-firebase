@@ -48,7 +48,7 @@ class NewsDetailsPage extends StatelessWidget {
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
                 child: Image.network(
                   news.urlToImage ?? '',
                   height: 350.h,
@@ -154,7 +154,7 @@ class NewsDetailsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () => _launchURL(news.url),
-              child: Text('Open News'),
+              child: const Text('Open News'),
             ),
           ],
         ),
