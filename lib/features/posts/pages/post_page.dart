@@ -29,17 +29,21 @@ class _PostPageState extends ConsumerState<PostPage> {
           data: (data) {
             return data.isEmpty
                 ? const Text('No posts')
-                : ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      final posts = data[index];
-
-                      return PostCard(
-                        postData: posts,
-                      );
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      ref.refresh(postProvider);
                     },
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final posts = data[index];
+
+                        return PostCard(
+                          postData: posts,
+                        );
+                      },
+                    ),
                   );
           },
           error: (e, s) => Center(

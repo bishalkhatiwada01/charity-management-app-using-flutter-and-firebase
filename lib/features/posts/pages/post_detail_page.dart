@@ -8,6 +8,7 @@ import 'package:charity_management_app/features/posts/widgets/volunteer_button.d
 import 'package:charity_management_app/features/volunteers/pages/send_application_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -321,8 +322,7 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  final TextEditingController
-                                      _amountController =
+                                  final TextEditingController amountController =
                                       TextEditingController();
                                   return AlertDialog(
                                     title: Text(
@@ -334,10 +334,16 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
                                       ),
                                     ),
                                     content: TextField(
-                                      controller: _amountController,
+                                      controller: amountController,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .inversePrimary,
+                                          ),
+                                        ),
                                         labelText: 'Enter amount',
                                         labelStyle: TextStyle(
                                           color: Theme.of(context)
@@ -371,7 +377,7 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
                                         ),
                                         onPressed: () {
                                           int amount =
-                                              int.parse(_amountController.text);
+                                              int.parse(amountController.text);
                                           payWithKhaltiInApp(amount);
                                         },
                                       ),
@@ -422,24 +428,28 @@ class _PostDetailsPageState extends ConsumerState<PostDetailsPage> {
       'paymentDate': DateTime.now(),
       'postId': widget.postModel.postId,
     }).then((value) {
-      print("Payment Added");
+      if (kDebugMode) {
+        print("Payment Added");
+      }
     }).catchError((error) {
-      print("Failed to add payment: $error");
+      if (kDebugMode) {
+        print("Failed to add payment: $error");
+      }
     });
 
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Success"),
-            content: Text("Payment successful"),
+            title: const Text("Success"),
+            content: const Text("Payment successful"),
             actions: [
               SimpleDialogOption(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               )
             ],
           );
